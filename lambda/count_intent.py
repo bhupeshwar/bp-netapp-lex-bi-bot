@@ -23,8 +23,8 @@ import bibot_helpers as helpers
 import bibot_userexits as userexits
 
 # SELECT statement for Count query
-COUNT_SELECT = "SELECT count(dl.Template_id) ,dmd.Template_Name FROM ba_dl dl , ba_dashboard_master_details dmd"
-COUNT_JOIN = " WHERE on dl.Template_id = dmd.Template_id "
+COUNT_SELECT = "select count(DMD.template_Name) from BA_DL as DL , BA_DASHBOARD_MASTER_DETAILS as DMD"
+COUNT_JOIN = " WHERE dl.template_id = dmd.template_id "
 COUNT_WHERE = " AND LOWER({}) LIKE LOWER('%{}%') "
 COUNT_PHRASE = 'job ran'
 
