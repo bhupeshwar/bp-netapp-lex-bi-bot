@@ -1,5 +1,5 @@
 {
-    "name": "NetApp-BIBot_Reset_Intent",
+    "name": "Reset_Intent",
     "description": "Tell BIBot to start over",
     "sampleUtterances": [
       "Forget {venue_city} BIBot",

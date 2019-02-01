@@ -1,6 +1,6 @@
 {
-        "name": "NetApp-BIBot_Goodbye_Intent",
-        "description": "Let BIBot_BP know you're done",
+        "name": "Goodbye_Intent",
+        "description": "Let BIBot know you're done",
         "conclusionStatement": {
           "messages": [
             {

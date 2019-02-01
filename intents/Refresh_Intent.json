@@ -1,5 +1,5 @@
 {
-        "name": "NetApp-BIBot_Refresh_Intent",
+        "name": "Refresh_Intent",
         "description": "Refresh dimesions from the database",
         "conclusionStatement": {
           "messages": [

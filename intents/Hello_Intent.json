@@ -1,5 +1,5 @@
 {
-        "name": "NetApp-BIBot_Hello_Intent",
+        "name": "Hello_Intent",
         "description": "Say hello to BIBot",
         "conclusionStatement": {
           "messages": [
