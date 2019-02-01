@@ -1,5 +1,5 @@
 {
-  "name": "NetAppBIBot",
+  "name": "NetApp-BIBot",
   "description": "NetApp-BIBot - a SQL query bot for the JOB_DETAILS database",
   "intents": [
         {
