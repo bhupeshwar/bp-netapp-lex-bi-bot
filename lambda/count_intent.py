@@ -1,12 +1,12 @@
 #
 # Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-# 
+#
 # Permission is hereby granted, free of charge, to any person obtaining a copy of this
 # software and associated documentation files (the "Software"), to deal in the Software
 # without restriction, including without limitation the rights to use, copy, modify,
 # merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
 # permit persons to whom the Software is furnished to do so.
-# 
+#
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
 # INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
 # PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
@@ -23,10 +23,10 @@ import bibot_helpers as helpers
 import bibot_userexits as userexits
 
 # SELECT statement for Count query
-COUNT_SELECT = "SELECT SUM(s.qty) FROM sales s, event e, venue v, category c, date_dim d "
-COUNT_JOIN = " WHERE e.event_id = s.event_id AND v.venue_id = e.venue_id AND c.cat_id = e.cat_id AND d.date_id = e.date_id "
-COUNT_WHERE = " AND LOWER({}) LIKE LOWER('%{}%') "   
-COUNT_PHRASE = 'tickets sold'
+COUNT_SELECT = "SELECT count(dl.Template_id) ,dmd.Template_Name FROM ba_dl dl , ba_dashboard_master_details dmd"
+COUNT_JOIN = " WHERE on dl.Template_id = dmd.Template_id "
+COUNT_WHERE = " AND LOWER({}) LIKE LOWER('%{}%') "
+COUNT_PHRASE = 'job ran'
 
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
@@ -41,17 +41,17 @@ def lambda_handler(event, context):
 
     if config_error is not None:
         return helpers.close(session_attributes, 'Fulfilled',
-            {'contentType': 'PlainText', 'content': config_error})   
+            {'contentType': 'PlainText', 'content': config_error})
     else:
         return count_intent_handler(event, session_attributes)
 
 
 def count_intent_handler(intent_request, session_attributes):
     method_start = time.perf_counter()
-    
+
     logger.debug('<<BIBot>> count_intent_handler: intent_request = ' + json.dumps(intent_request))
     logger.debug('<<BIBot>> count_intent_handler: session_attributes = ' + json.dumps(session_attributes))
-    
+
     session_attributes['greetingCount'] = '1'
     session_attributes['resetCount'] = '0'
     session_attributes['finishedCount'] = '0'
@@ -63,8 +63,8 @@ def count_intent_handler(intent_request, session_attributes):
     try:
         slot_values = helpers.get_slot_values(slot_values, intent_request)
     except bibot.SlotError as err:
-        return helpers.close(session_attributes, 'Fulfilled', {'contentType': 'PlainText','content': str(err)})   
-    
+        return helpers.close(session_attributes, 'Fulfilled', {'contentType': 'PlainText','content': str(err)})
+
     logger.debug('<<BIBot>> "count_intent_handler(): slot_values: %s', slot_values)
 
     # Retrieve "remembered" slot values from session attributes
@@ -73,7 +73,7 @@ def count_intent_handler(intent_request, session_attributes):
 
     # Remember updated slot values
     helpers.remember_slot_values(slot_values, session_attributes)
-    
+
     # build and execute query
     select_clause = COUNT_SELECT
     where_clause = COUNT_JOIN
@@ -82,9 +82,9 @@ def count_intent_handler(intent_request, session_attributes):
         if slot_values[slot_key] is not None:
             value = userexits.pre_process_query_value(slot_key, slot_values[slot_key])
             where_clause += COUNT_WHERE.format(bibot.DIMENSIONS.get(dimension).get('column'), value)
-    
+
     query_string = select_clause + where_clause
-    
+
     response = helpers.execute_athena_query(query_string)
 
     result = response['ResultSet']['Rows'][1]['Data'][0]
@@ -93,7 +93,7 @@ def count_intent_handler(intent_request, session_attributes):
     else:
         count = 0
 
-    logger.debug('<<BIBot>> "Count value is: %s' % count) 
+    logger.debug('<<BIBot>> "Count value is: %s' % count)
 
     # build response string
     if count == 0:
@@ -115,5 +115,4 @@ def count_intent_handler(intent_request, session_attributes):
 
     response_string += '.'
 
-    return helpers.close(session_attributes, 'Fulfilled', {'contentType': 'PlainText','content': response_string})   
-
+    return helpers.close(session_attributes, 'Fulfilled', {'contentType': 'PlainText','content': response_string})

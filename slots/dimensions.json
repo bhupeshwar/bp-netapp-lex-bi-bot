@@ -1,48 +1,19 @@
 {
-    "name": "dimensions", 
-    "description": "List of dimensions in ticket database",
-    "valueSelectionStrategy": "TOP_RESOLUTION", 
+    "name": "dimensions",
+    "description": "List of dimensions in job_details database",
+    "valueSelectionStrategy": "TOP_RESOLUTION",
     "enumerationValues": [
         {
             "synonyms": [
-                "month"
-            ], 
-            "value": "months"
-        }, 
+                "dl_name"
+            ],
+            "value": "dl_name"
+        },
         {
             "synonyms": [
-                "city"
-            ], 
-            "value": "cities"
-        }, 
-        {
-            "synonyms": [
-                "stadiums", 
-                "locations", 
-                "venue"
-            ], 
-            "value": "venues"
-        }, 
-        {
-            "synonyms": [
-                "category"
-            ], 
-            "value": "categories"
-        }, 
-        {
-            "synonyms": [
-                "shows", 
-                "concerts", 
-                "event"
-            ], 
-            "value": "events"
-        }, 
-        {
-            "synonyms": [
-                "state"
-            ], 
-            "value": "states"
+                "template_name"
+            ],
+            "value": "template_name"
         }
     ]
 }
-

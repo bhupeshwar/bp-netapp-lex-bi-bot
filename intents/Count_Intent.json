@@ -17,128 +17,67 @@
           "type": "CodeHook"
         },
         "sampleUtterances": [
-          "How many {event_name} tickets were sold for {cat_desc}",
-          "How many {event_name} tickets at {venue_name}", 
-          "Count of {event_name} tickets sold in {venue_city} {venue_state}",
-          "Count of {event_name} tickets in {venue_state}", 
-          "Total {event_name} ticket sales in {venue_city}", 
-          "Total {event_name} tickets sold in {event_month}", 
-          "Total {event_name} ticket sales", 
+          "How many {dl_name} jobs were ran for {template_name}",
+          "Total {dl_name} jobs ran in {event_month}",
+          "Total {dl_name} jobs ran",
 
-          "How many tickets were sold for {cat_desc}", 
-          "How many tickets were sold at {venue_name} in {event_month}", 
-          "Tickets sold in {venue_city} {venue_state} for {event_name}", 
-          "Tickets sold in {venue_state} in {event_month}", 
-	  "Count of tickets sold in {venue_city} for {event_name}", 
-          "Count of tickets sold in {event_month} in {venue_city}", 
-          "Ticket sales for {event_name} in {venue_state}", 
+          "How many jobs were ran for {template_name}",
 
-          "How many tickets were sold"
+					"How many tickets were sold"
         ],
     "slots": [
         {
-            "slotType": "event_name", 
-            "name": "event_name", 
-            "slotConstraint": "Optional", 
+            "slotType": "dl_name",
+            "name": "dl_name",
+            "slotConstraint": "Optional",
             "valueElicitationPrompt": {
-                "maxAttempts": 2, 
+                "maxAttempts": 2,
                 "messages": [
                     {
-                        "content": "The name of the event", 
+                        "content": "The name of the DL",
                         "contentType": "PlainText"
                     }
                 ]
-            }, 
-            "priority": 1, 
-            "slotTypeVersion": "$LATEST", 
-            "sampleUtterances": [], 
-            "description": "event_name"
-        }, 
-        {
-            "slotType": "AMAZON.Month", 
-            "name": "event_month", 
-            "slotConstraint": "Optional", 
-            "valueElicitationPrompt": {
-                "maxAttempts": 2, 
-                "messages": [
-                    {
-                        "content": "The month of the event", 
-                        "contentType": "PlainText"
-                    }
-                ]
-            }, 
-            "priority": 2, 
-            "sampleUtterances": [], 
-            "description": "event_month"
-        }, 
-        {
-            "slotType": "AMAZON.US_CITY", 
-            "name": "venue_city", 
-            "slotConstraint": "Optional", 
-            "valueElicitationPrompt": {
-                "maxAttempts": 2, 
-                "messages": [
-                    {
-                        "content": "The city where the event takes place", 
-                        "contentType": "PlainText"
-                    }
-                ]
-            }, 
-            "priority": 3, 
-            "sampleUtterances": [], 
-            "description": "venue_city"
+            },
+            "priority": 1,
+            "slotTypeVersion": "$LATEST",
+            "sampleUtterances": [],
+            "description": "dl_name"
         },
         {
-            "slotType": "AMAZON.US_STATE", 
-            "name": "venue_state", 
-            "slotConstraint": "Optional", 
+            "slotType": "AMAZON.Month",
+            "name": "event_month",
+            "slotConstraint": "Optional",
             "valueElicitationPrompt": {
-                "maxAttempts": 2, 
+                "maxAttempts": 2,
                 "messages": [
                     {
-                        "content": "The state where the event takes place", 
+                        "content": "The month of the event",
                         "contentType": "PlainText"
                     }
                 ]
-            }, 
-            "priority": 4, 
-            "sampleUtterances": [], 
-            "description": "venue_state"
-        }, 
+            },
+            "priority": 2,
+            "sampleUtterances": [],
+            "description": "event_month"
+        },
         {
-            "slotType": "AMAZON.MusicVenue", 
-            "name": "venue_name", 
-            "slotConstraint": "Optional", 
+            "slotType": "template_name",
+            "name": "template_name",
+            "slotConstraint": "Optional",
             "valueElicitationPrompt": {
-                "maxAttempts": 2, 
+                "maxAttempts": 2,
                 "messages": [
                     {
-                        "content": "The venue where the event takes place", 
+                        "content": "The type of event",
                         "contentType": "PlainText"
                     }
                 ]
-            }, 
-            "priority": 5, 
-            "sampleUtterances": [], 
-            "description": "venue_name"
-        }, 
-        {
-            "slotType": "cat_desc", 
-            "name": "cat_desc", 
-            "slotConstraint": "Optional", 
-            "valueElicitationPrompt": {
-                "maxAttempts": 2, 
-                "messages": [
-                    {
-                        "content": "The type of event", 
-                        "contentType": "PlainText"
-                    }
-                ]
-            }, 
-            "priority": 6, 
-            "slotTypeVersion": "$LATEST", 
-            "sampleUtterances": [], 
-            "description": "cat_desc"
-        } 
+            },
+            "priority": 6,
+            "slotTypeVersion": "$LATEST",
+            "sampleUtterances": [],
+            "description": "template_name"
+        }
     ]
 }

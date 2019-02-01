@@ -1,6 +1,6 @@
 {
-  "name": "BIBot",
-  "description": "BIBot - a SQL query bot for the TICKIT database",
+  "name": "NetApp-BIBot",
+  "description": "NetApp-BIBot - a SQL query bot for the JOB_DETAILS database",
   "intents": [
         {
             "intentVersion": "$LATEST",
@@ -8,19 +8,7 @@
         },
         {
             "intentVersion": "$LATEST",
-            "intentName": "Top_Intent"
-        },
-        {
-            "intentVersion": "$LATEST",
-            "intentName": "Compare_Intent"
-        },
-        {
-            "intentVersion": "$LATEST",
 	    "intentName": "Count_Intent"
-        },
-        {
-            "intentVersion": "$LATEST",
-            "intentName": "Switch_Intent"
         },
         {
             "intentVersion": "$LATEST",

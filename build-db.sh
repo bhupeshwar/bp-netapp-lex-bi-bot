@@ -20,35 +20,36 @@ echo '$ATHENA_BUCKET_REGION' "= $ATHENA_BUCKET_REGION"
 echo '$ATHENA_DB_DESCRIPTION' "= $ATHENA_DB_DESCRIPTION"
 echo
 
-# Create TICKIT database
+# Create JOB_DETAILS database
 echo "Creating Athena database $ATHENA_DB"
 aws glue create-database --database-input "Name=$ATHENA_DB,Description=$ATHENA_DB_DESCRIPTION" >/dev/null
 
-# Create TICKIT users table in Athena
-echo "Creating users table..."
+# Create JOB_DETAILS ba_dl table in Athena
+echo "Creating ba_dl table..."
 aws athena start-query-execution \
-    --query-string "create external table users (user_id INT, username STRING, firstname STRING, lastname STRING, city STRING, state STRING, email STRING, phone STRING, like_sports BOOLEAN, liketheatre BOOLEAN, likeconcerts BOOLEAN, likejazz BOOLEAN, likeclassical BOOLEAN, likeopera BOOLEAN, likerock BOOLEAN, likevegas BOOLEAN, likebroadway BOOLEAN, likemusicals BOOLEAN) ROW FORMAT DELIMITED FIELDS TERMINATED BY '|' LOCATION '$ATHENA_BUCKET/users';" \
+    --query-string "create external table ba_dl (dl_id INT, dl_name STRING, description STRING, template_id INT, refesh_date DATE, start_date DATE, end_date DATE, status STRING, notes STRING, attribute1 STRING,attribute2 STRING,attribute3 STRING,attribute4 STRING,attribute5 STRING,attribute6 STRING,attribute7 INT,attribute8 INT,attribute9 INT, created_by STRING, created_date DATE, last_updated_by STRING, last_updated_date DATE, sla_time DATE) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' LOCATION '$ATHENA_BUCKET/ba_dl';" \
     --query-execution-context "Database=$ATHENA_DB" \
     --result-configuration "OutputLocation=$ATHENA_BUCKET/output/" \
     >/dev/null
 
-# Create TICKIT venue table in Athena
-echo "Creating venue table..."
+# Create JOB_DETAILS ba_dl_baseline table in Athena
+echo "Creating ba_dl_baseline table..."
 aws athena start-query-execution \
-    --query-string "create external table venue (venue_id INT, venue_name STRING, venue_city STRING, venue_state STRING, venue_seats INT) ROW FORMAT DELIMITED FIELDS TERMINATED BY '|' LOCATION '$ATHENA_BUCKET/venue';" \
+    --query-string "create external table ba_dl_baseline (baseline_id INT, object_name STRING, description STRING, baseline_min INT, category STRING, subcategory STRING, notes STRING, attribute1 STRING,attribute2 STRING,attribute3 STRING,attribute4 STRING,attribute5 STRING,attribute6 STRING,attribute7 INT,attribute8 INT,attribute9 INT,created_by STRING, created_date DATE, last_updated_by STRING, last_updated_date DATE,parent_baseline_id INT) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' LOCATION '$ATHENA_BUCKET/ba_dl_baseline';" \
     --query-execution-context "Database=$ATHENA_DB" \
     --result-configuration "OutputLocation=$ATHENA_BUCKET/output/" \
     >/dev/null
 
-# Create TICKIT category table in Athena
-echo "Creating category table..."
+# Create JOB_DETAILS ba_dl_details table in Athena
+echo "Creating ba_dl_details table..."
 aws athena start-query-execution \
-    --query-string "create external table category (cat_id INT, cat_group STRING, cat_name STRING, cat_desc STRING) ROW FORMAT DELIMITED FIELDS TERMINATED BY '|' LOCATION '$ATHENA_BUCKET/category';" \
+    --query-string "create external table ba_dl_details (dl_detail_id INT, dl_id INT, sequence_num INT, baseline_id INT,start_time DATE, end_time DATE, issue_count INT, time_lost_mins INT, notes STRING, attribute1 STRING,attribute2 STRING,attribute3 STRING,attribute4 STRING,attribute5 STRING,attribute6 STRING,attribute7 INT,attribute8 INT,attribute9 INT,created_by STRING, created_date DATE, last_updated_by STRING, last_updated_date DATE, template_id INT) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' LOCATION '$ATHENA_BUCKET/ba_dl_details';" \
     --query-execution-context "Database=$ATHENA_DB" \
     --result-configuration "OutputLocation=$ATHENA_BUCKET/output/" \
     >/dev/null
 
-# Create TICKIT date table in Athena
+
+# Create JOB_DETAILS date table in Athena
 echo "Creating date_dim table..."
 aws athena start-query-execution \
     --query-string "create external table date_dim (date_id INT, cal_date DATE, day STRING, week STRING, month STRING, quarter STRING, year INT, holiday BOOLEAN) ROW FORMAT DELIMITED FIELDS TERMINATED BY '|' LOCATION '$ATHENA_BUCKET/date';" \
@@ -56,28 +57,10 @@ aws athena start-query-execution \
     --result-configuration "OutputLocation=$ATHENA_BUCKET/output/" \
     >/dev/null
 
-# Create TICKIT event table in Athena
-echo "Creating event table..."
+# Create JOB_DETAILS ba_dashboard_master_details table in Athena
+echo "Creating ba_dashboard_master_details table..."
 aws athena start-query-execution \
-    --query-string "create external table event (event_id INT, venue_id INT, cat_id INT, date_id INT, event_name STRING, start_time TIMESTAMP) ROW FORMAT DELIMITED FIELDS TERMINATED BY '|' LOCATION '$ATHENA_BUCKET/event';" \
+    --query-string "create external table ba_dashboard_master_details (date_id INT, sequence_name STRING, sequence_num INT, master_sequencer_id INT, job_sequencer_id INT, baseline_id INT, template_id INT, template_name STRING) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' LOCATION '$ATHENA_BUCKET/ba_dashboard_master_details';" \
     --query-execution-context "Database=$ATHENA_DB" \
     --result-configuration "OutputLocation=$ATHENA_BUCKET/output/" \
     >/dev/null
-
-# Create TICKIT listing table in Athena
-echo "Creating listing table..."
-aws athena start-query-execution \
-    --query-string "create external table listing (list_id INT, seller_id INT, event_id INT, date_id INT, qty INT, price DECIMAL(8,2), total DECIMAL(8,2), listing_time TIMESTAMP) ROW FORMAT DELIMITED FIELDS TERMINATED BY '|' LOCATION '$ATHENA_BUCKET/listing';" \
-    --query-execution-context "Database=$ATHENA_DB" \
-    --result-configuration "OutputLocation=$ATHENA_BUCKET/output/" \
-    >/dev/null
-
-# Create TICKIT sales table in Athena
-echo "Creating sales table..."
-aws athena start-query-execution \
-    --query-string "create external table sales (sales_id INT, list_id INT, seller_id INT, buyer_id INT, event_id INT, date_id INT, qty INT, amount DECIMAL(8,2), commission DECIMAL(8,2), sale_time TIMESTAMP) ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' LOCATION '$ATHENA_BUCKET/sales';" \
-    --query-execution-context "Database=$ATHENA_DB" \
-    --result-configuration "OutputLocation=$ATHENA_BUCKET/output/" \
-    >/dev/null
-
-

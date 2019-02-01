@@ -1,0 +1,9 @@
+{
+        "name": "dl_name",
+        "description": "Names of DL in job_details database",
+        "valueSelectionStrategy": "TOP_RESOLUTION",
+        "enumerationValues": [
+           { "value": "Sample DL 1" },
+           { "value": "Another Sample DL" }
+	 ]
+}
