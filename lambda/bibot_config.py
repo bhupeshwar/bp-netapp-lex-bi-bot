@@ -23,7 +23,7 @@ SLOT_CONFIG = {
     'event_month':      {'type': ORIGINAL_VALUE, 'remember': True},
     'template_name':         {'type': TOP_RESOLUTION, 'remember': True,  'error': 'I couldn\'t find a template called "{}".'},
     'count':            {'type': ORIGINAL_VALUE, 'remember': True},
-    'dimension':        {'type': ORIGINAL_VALUE, 'remember': True},
+    'NetApp-BIBot_dimension':        {'type': ORIGINAL_VALUE, 'remember': True},
     'one_month':        {'type': ORIGINAL_VALUE, 'remember': False},
     'another_month':    {'type': ORIGINAL_VALUE, 'remember': False},
     'one_category':     {'type': TOP_RESOLUTION, 'remember': False,  'error': 'I couldn\'t find a category called "{}".'},
