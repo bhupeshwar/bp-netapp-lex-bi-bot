@@ -23,7 +23,7 @@ import bibot_helpers as helpers
 import bibot_userexits as userexits
 
 # SELECT statement for TODAY_JOB_DONE query
-TODAY_JOB_DONE_SELECT = "SELECT count(DL.dl_name) as job_done from BA_DL as DL"
+TODAY_JOB_DONE_SELECT = "SELECT count(DL.dl_name) from BA_DL as DL"
 TODAY_JOB_DONE_JOIN = " WHERE date_format(DL.end_date, '%Y-%m-%d')  =  date_format(current_timestamp, '%Y-%m-%d') "
 TODAY_JOB_DONE_WHERE = " AND LOWER({}) LIKE LOWER('%{}%')  "
 TODAY_JOB_DONE_PHRASE = 'today job done'
