@@ -43,14 +43,14 @@ def lambda_handler(event, context):
         return helpers.close(session_attributes, 'Fulfilled',
             {'contentType': 'PlainText', 'content': config_error})
     else:
-        return jobdone_intent_handler(event, session_attributes)
+        return jobdonetoday_intent_handler(event, session_attributes)
 
 
-def jobdone_intent_handler(intent_request, session_attributes):
+def jobdonetoday_intent_handler(intent_request, session_attributes):
     method_start = time.perf_counter()
 
-    logger.debug('<<BIBot>> jobdone_intent_handler: intent_request = ' + json.dumps(intent_request))
-    logger.debug('<<BIBot>> jobdone_intent_handler: session_attributes = ' + json.dumps(session_attributes))
+    logger.debug('<<BIBot>> jobdonetoday_intent_handler: intent_request = ' + json.dumps(intent_request))
+    logger.debug('<<BIBot>> jobdonetoday_intent_handler: session_attributes = ' + json.dumps(session_attributes))
 
     session_attributes['greetingCount'] = '1'
     session_attributes['resetCount'] = '0'
@@ -65,11 +65,11 @@ def jobdone_intent_handler(intent_request, session_attributes):
     except bibot.SlotError as err:
         return helpers.close(session_attributes, 'Fulfilled', {'contentType': 'PlainText','content': str(err)})
 
-    logger.debug('<<BIBot>> "jobdone_intent_handler(): slot_values: %s', slot_values)
+    logger.debug('<<BIBot>> "jobdonetoday_intent_handler(): slot_values: %s', slot_values)
 
     # Retrieve "remembered" slot values from session attributes
     slot_values = helpers.get_remembered_slot_values(slot_values, session_attributes)
-    logger.debug('<<BIBot>> "jobdone_intent_handler(): slot_values afer get_remembered_slot_values: %s', slot_values)
+    logger.debug('<<BIBot>> "jobdonetoday_intent_handler(): slot_values afer get_remembered_slot_values: %s', slot_values)
 
     # Remember updated slot values
     helpers.remember_slot_values(slot_values, session_attributes)

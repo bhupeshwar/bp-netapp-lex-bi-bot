@@ -23,10 +23,10 @@ import bibot_helpers as helpers
 import bibot_userexits as userexits
 
 # SELECT statement for Count query
-COUNT_SELECT = "select count(DMD.template_Name) from BA_DL as DL , BA_DASHBOARD_MASTER_DETAILS as DMD"
-COUNT_JOIN = " WHERE dl.template_id = dmd.template_id "
-COUNT_WHERE = " AND LOWER({}) LIKE LOWER('%{}%') AND date_format(start_date, '%Y-%m-%d')  =  date_format({}, '%Y-%m-%d') "
-COUNT_PHRASE = 'today job done'
+COUNT_SELECT = "SELECT count(DL.dl_name) as job_done from BA_DL as DL"
+COUNT_JOIN = " WHERE date_format(DL.end_date, '%Y-%m-%d')  =  date_format({}, '%Y-%m-%d') "
+COUNT_WHERE = " AND LOWER({}) LIKE LOWER('%{}%') "
+COUNT_PHRASE = 'job done'
 
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
