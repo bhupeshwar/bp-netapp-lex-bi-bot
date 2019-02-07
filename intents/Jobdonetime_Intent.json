@@ -22,7 +22,7 @@
     "slots": [
         {
 					"slotType": "AMAZON.DATE",
-					"name": "my_date",
+					"name": "job_date",
             "slotConstraint": "Optional",
             "valueElicitationPrompt": {
                 "maxAttempts": 2,
@@ -35,7 +35,7 @@
             },
             "priority": 2,
             "sampleUtterances": [],
-            "description": "my_date"
+            "description": "job_date"
         },
         {
             "slotType": "dl_name",
