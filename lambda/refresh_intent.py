@@ -26,9 +26,9 @@ import bibot_userexits as userexits
 #
 # parameters for Refresh intent
 #
-REFRESH_QUERY = 'SELECT DISTINCT event_name from event ORDER BY event_name'
+REFRESH_QUERY = 'SELECT DISTINCT dl_name from ba_dl ORDER BY dl_name'
 REFRESH_SLOT = 'event_name'
-REFRESH_INTENT = 'Compare_Intent'
+REFRESH_INTENT = 'Jobdone_Intent'
 REFRESH_BOT = 'BIBot'
 
 logger = logging.getLogger()
