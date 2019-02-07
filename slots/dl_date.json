@@ -1,9 +1,0 @@
-{
-        "name": "dl_date",
-        "description": "Date of DL in job_details database table date_dim",
-        "valueSelectionStrategy": "TOP_RESOLUTION",
-        "enumerationValues": [
-          { "value": "Date 1" },
-          { "value": "Date 2" }
-	 ]
-}

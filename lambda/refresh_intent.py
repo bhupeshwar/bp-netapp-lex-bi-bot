@@ -27,9 +27,9 @@ import bibot_userexits as userexits
 # parameters for Refresh intent
 #
 REFRESH_QUERY = 'SELECT DISTINCT dl_name from ba_dl ORDER BY dl_name'
-REFRESH_SLOT = 'event_name'
+REFRESH_SLOT = 'dl_name'
 REFRESH_INTENT = 'Jobdone_Intent'
-REFRESH_BOT = 'BIBot'
+REFRESH_BOT = 'BIBotNetApp'
 
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
@@ -77,9 +77,9 @@ def refresh_intent_handler(intent_request, session_attributes):
     lex_models = boto3.client('lex-models')
     response = lex_models.get_slot_type(name=REFRESH_SLOT, version='$LATEST')
     logger.debug('<<BIBot>> "boto3 version = ' + boto3.__version__)
-    logger.debug('<<BIBot>> "Lex slot event_name = ' + pprint.pformat(response, indent=4))
-    logger.debug('<<BIBot>> "Lex slot event_name checksum = ' + response['checksum'])
-    logger.debug('<<BIBot>> "Lex slot event_name valueSelectionStrategy = ' + response['valueSelectionStrategy'])
+    logger.debug('<<BIBot>> "Lex slot dl_name = ' + pprint.pformat(response, indent=4))
+    logger.debug('<<BIBot>> "Lex slot dl_name checksum = ' + response['checksum'])
+    logger.debug('<<BIBot>> "Lex slot dl_name valueSelectionStrategy = ' + response['valueSelectionStrategy'])
 
     try:
         logger.debug('<<BIBot>> "st_values = ' + pprint.pformat(st_values))
@@ -125,5 +125,5 @@ def refresh_intent_handler(intent_request, session_attributes):
 
     logger.debug('<<BIBot>> Lex put bot = ' + pprint.pformat(response, indent=4))
 
-    response_string = "I've refreshed the events dimension from the database.  Please rebuild me."
+    response_string = "I've refreshed the dl_name dimension from the database.  Please rebuild me."
     return helpers.close(session_attributes, 'Fulfilled', {'contentType': 'PlainText','content': response_string})
