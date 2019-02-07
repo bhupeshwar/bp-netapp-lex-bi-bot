@@ -22,11 +22,11 @@ import bibot_config as bibot
 import bibot_helpers as helpers
 import bibot_userexits as userexits
 
-# SELECT statement for Count query
-COUNT_SELECT = "SELECT count(DL.dl_name) as job_done from BA_DL as DL"
-COUNT_JOIN = " WHERE date_format(DL.end_date, '%Y-%m-%d')  =  date_format({}, '%Y-%m-%d') "
-COUNT_WHERE = " AND LOWER({}) LIKE LOWER('%{}%') "
-COUNT_PHRASE = 'job done'
+# SELECT statement for JOB_DONE query
+JOB_DONE_SELECT = "SELECT count(DL.dl_name) from BA_DL as DL"
+JOB_DONE_JOIN = " WHERE date_format(DL.end_date, '%Y-%m-%d')  =  date_format({}, '%Y-%m-%d') "
+JOB_DONE_WHERE = " AND LOWER({}) LIKE LOWER('%{}%') "
+JOB_DONE_PHRASE = 'job done'
 
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
@@ -75,13 +75,13 @@ def jobdone_intent_handler(intent_request, session_attributes):
     helpers.remember_slot_values(slot_values, session_attributes)
 
     # build and execute query
-    select_clause = COUNT_SELECT
-    where_clause = COUNT_JOIN
+    select_clause = JOB_DONE_SELECT
+    where_clause = JOB_DONE_JOIN
     for dimension in bibot.DIMENSIONS:
         slot_key = bibot.DIMENSIONS.get(dimension).get('slot')
         if slot_values[slot_key] is not None:
             value = userexits.pre_process_query_value(slot_key, slot_values[slot_key])
-            where_clause += COUNT_WHERE.format(bibot.DIMENSIONS.get(dimension).get('column'), value)
+            where_clause += JOB_DONE_WHERE.format(bibot.DIMENSIONS.get(dimension).get('column'), value)
 
     query_string = select_clause + where_clause
 
@@ -97,9 +97,9 @@ def jobdone_intent_handler(intent_request, session_attributes):
 
     # build response string
     if count == 0:
-        response_string = 'There were no {}'.format(COUNT_PHRASE)
+        response_string = 'There were no {}'.format(JOB_DONE_PHRASE)
     else:
-        response_string = 'There were {} {}'.format(count, COUNT_PHRASE)
+        response_string = 'There were {} {}'.format(count, JOB_DONE_PHRASE)
 
     # add the English versions of the WHERE clauses
     for dimension in bibot.DIMENSIONS:
