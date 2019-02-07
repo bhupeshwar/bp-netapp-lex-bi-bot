@@ -55,7 +55,7 @@ def jobdonetoday_intent_handler(intent_request, session_attributes):
     session_attributes['greetingCount'] = '1'
     session_attributes['resetCount'] = '0'
     session_attributes['finishedCount'] = '0'
-    session_attributes['lastIntent'] = 'Jobdone_Intent'
+    session_attributes['lastIntent'] = 'Jobdonetoday_Intent'
 
     # Retrieve slot values from the current request
     slot_values = session_attributes.get('slot_values')
