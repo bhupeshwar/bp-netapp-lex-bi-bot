@@ -1,5 +1,5 @@
 {
-	"name": "Todayjobdone_Intent",
+	"name": "Jobdonetoday_Intent",
         "description": "Recursively query the dataset",
         "conclusionStatement": {
           "messages": [
@@ -19,7 +19,7 @@
         "sampleUtterances": [
           "Is {template_name} jobs completed today"
           ],
-    "slots": [        
+    "slots": [
         {
             "slotType": "template_name",
             "name": "template_name",

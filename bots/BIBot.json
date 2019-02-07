@@ -12,6 +12,14 @@
         },
         {
             "intentVersion": "$LATEST",
+	           "intentName": "Jobdonetoday_Intent"
+        },
+        {
+            "intentVersion": "$LATEST",
+	           "intentName": "Jobdone_Intent"
+        },
+        {
+            "intentVersion": "$LATEST",
             "intentName": "Reset_Intent"
         },
         {
