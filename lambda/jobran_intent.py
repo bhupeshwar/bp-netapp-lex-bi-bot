@@ -83,16 +83,14 @@ def jobdone_intent_handler(intent_request, session_attributes):
         if slot_key == 'job_date':
             if slot_values[slot_key] is not None:
                 value = userexits.pre_process_query_value(slot_key, slot_values[slot_key])
-                where_clause += JOB_DONE_DATE.format('DL.start_date',value)
+                where_clause += JOB_RAN_DATE.format('DL.start_date',value)
         if slot_values[slot_key] is not None:
             if slot_key != 'job_date':
                 value = userexits.pre_process_query_value(slot_key, slot_values[slot_key])
-                where_clause += JOB_DONE_WHERE.format(bibot.DIMENSIONS.get(dimension).get('column'), value)
+                where_clause += JOB_RAN_WHERE.format(bibot.DIMENSIONS.get(dimension).get('column'), value)
 
     query_string = select_clause + where_clause
-
-    count = query_string
-
+    """
     count = query_string
     """
     response = helpers.execute_athena_query(query_string)
@@ -102,8 +100,8 @@ def jobdone_intent_handler(intent_request, session_attributes):
         count = result['VarCharValue']
     else:
         count = 0
-    """
-    
+
+
     logger.debug('<<BIBot>> "Count value is: %s' % count)
 
     # build response string
