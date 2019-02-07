@@ -21,6 +21,7 @@ TOP_RESOLUTION = 1
 SLOT_CONFIG = {
     'dl_name':       {'type': TOP_RESOLUTION, 'remember': True,  'error': 'I couldn\'t find an DL called "{}".'},
     'event_month':      {'type': ORIGINAL_VALUE, 'remember': True},
+    'job_date':      {'type': ORIGINAL_VALUE, 'remember': True},
     'template_name':         {'type': TOP_RESOLUTION, 'remember': True,  'error': 'I couldn\'t find a template called "{}".'},
     'count':            {'type': ORIGINAL_VALUE, 'remember': True},
     'dimension':        {'type': ORIGINAL_VALUE, 'remember': True},
