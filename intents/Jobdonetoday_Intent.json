@@ -33,7 +33,7 @@
                     }
                 ]
             },
-            "priority": 6,
+            "priority": 1,
             "slotTypeVersion": "$LATEST",
             "sampleUtterances": [],
             "description": "dl_name"

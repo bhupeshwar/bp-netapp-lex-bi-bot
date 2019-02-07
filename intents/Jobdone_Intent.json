@@ -21,6 +21,24 @@
 					"Were {dl_name} jobs completed"
           ],
     "slots": [
+			{
+					"slotType": "dl_name",
+					"name": "dl_name",
+					"slotConstraint": "Optional",
+					"valueElicitationPrompt": {
+							"maxAttempts": 2,
+							"messages": [
+									{
+											"content": "The type of event",
+											"contentType": "PlainText"
+									}
+							]
+					},
+					"priority": 1,
+					"slotTypeVersion": "$LATEST",
+					"sampleUtterances": [],
+					"description": "dl_name"
+			},
         {
             "slotType": "AMAZON.DATE",
             "name": "job_date",
@@ -37,24 +55,6 @@
             "priority": 2,
             "sampleUtterances": [],
             "description": "job_date"
-        },
-        {
-            "slotType": "dl_name",
-            "name": "dl_name",
-            "slotConstraint": "Optional",
-            "valueElicitationPrompt": {
-                "maxAttempts": 2,
-                "messages": [
-                    {
-                        "content": "The type of event",
-                        "contentType": "PlainText"
-                    }
-                ]
-            },
-            "priority": 6,
-            "slotTypeVersion": "$LATEST",
-            "sampleUtterances": [],
-            "description": "dl_name"
         }
     ]
 }
