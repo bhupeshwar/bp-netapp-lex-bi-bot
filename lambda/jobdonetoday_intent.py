@@ -97,9 +97,9 @@ def jobdonetoday_intent_handler(intent_request, session_attributes):
 
     # build response string
     if count == 0:
-        response_string = 'There were no {}'.format(COUNT_PHRASE)
+        response_string = 'There were no {}'.format(TODAY_JOB_DONE_PHRASE)
     else:
-        response_string = 'There were {} {}'.format(count, COUNT_PHRASE)
+        response_string = 'There were {} {}'.format(count, TODAY_JOB_DONE_PHRASE)
 
     # add the English versions of the WHERE clauses
     for dimension in bibot.DIMENSIONS:
