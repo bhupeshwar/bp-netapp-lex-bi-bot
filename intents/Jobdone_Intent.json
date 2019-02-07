@@ -17,7 +17,7 @@
           "type": "CodeHook"
         },
         "sampleUtterances": [
-          "Is {template_name} jobs completed {job_date}"
+          "Is {dl_name} jobs completed {job_date}"
           ],
     "slots": [
         {
@@ -38,8 +38,8 @@
             "description": "job_date"
         },
         {
-            "slotType": "template_name",
-            "name": "template_name",
+            "slotType": "dl_name",
+            "name": "dl_name",
             "slotConstraint": "Optional",
             "valueElicitationPrompt": {
                 "maxAttempts": 2,
@@ -53,7 +53,7 @@
             "priority": 6,
             "slotTypeVersion": "$LATEST",
             "sampleUtterances": [],
-            "description": "template_name"
+            "description": "dl_name"
         }
     ]
 }
