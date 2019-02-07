@@ -86,6 +86,7 @@ def jobdonetoday_intent_handler(intent_request, session_attributes):
     query_string = select_clause + where_clause
 
     response = helpers.execute_athena_query(query_string)
+    response_string =''
 
     result = response['ResultSet']['Rows'][1]['Data'][0]
     if result:
