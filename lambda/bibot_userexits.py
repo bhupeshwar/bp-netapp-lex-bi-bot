@@ -40,9 +40,7 @@ def pre_process_query_value(key, value):
 
 # adjust slot values as necessary after reading from intent slots
 def post_process_slot_value(key, value):
-    if key == 'venue_state':
-        
-        logger.debug('<<BIBot>> post_process_slot_value() - returning key=%s, value=%s', key, value)
+    logger.debug('<<BIBot>> post_process_slot_value() - returning key=%s, value=%s', key, value)
     return value
 
 
@@ -66,6 +64,7 @@ def get_month_name(value):
 
 DIMENSION_FORMATTERS = {
     'dl_name':  {'format': 'For {}',              'function': str.title},
+    'job_date':  {'format': 'On {}',              'function': str.title},
     'event_month': {'format': 'In the month of {}',  'function': get_month_name},
     'template_name':    {'format': 'For {}',              'function': str.title}
 }
