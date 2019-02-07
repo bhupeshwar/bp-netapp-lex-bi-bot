@@ -20,6 +20,10 @@
         },
         {
             "intentVersion": "$LATEST",
+             "intentName": "Jobdonetime_Intent"
+        },
+        {
+            "intentVersion": "$LATEST",
             "intentName": "Reset_Intent"
         },
         {
