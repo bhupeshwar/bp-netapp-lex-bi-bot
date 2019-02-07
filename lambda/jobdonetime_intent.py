@@ -25,7 +25,7 @@ import bibot_userexits as userexits
 # SELECT statement for JOB_DONE query
 JOB_DONE_SELECT = "SELECT DL.end_date from BA_DL as DL"
 JOB_DONE_JOIN = " WHERE DL.status != 'W'  "
-JOB_DONE_DATE = " AND date_format(DL.end_date, '%Y-%m-%d')  =  date_format(timestamp'2019-02-07', '%Y-%m-%d') "
+JOB_DONE_DATE = " AND date_format({}, '%Y-%m-%d')  =  date_format(timestamp'{}', '%Y-%m-%d') "
 JOB_DONE_WHERE = " AND LOWER({}) LIKE LOWER('%{}%') "
 JOB_DONE_PHRASE = 'job completion date/time'
 
@@ -80,10 +80,15 @@ def jobdone_intent_handler(intent_request, session_attributes):
     where_clause = JOB_DONE_JOIN
     for dimension in bibot.DIMENSIONS:
         slot_key = bibot.DIMENSIONS.get(dimension).get('slot')
+        """
         if slot_key == 'job_date':
             if slot_values[slot_key] is not None:
                 value = userexits.pre_process_query_value(slot_key, slot_values[slot_key])
-                where_clause += JOB_DONE_DATE
+                where_clause += JOB_DONE_DATE.format('DL.end_date',value)
+        """
+        if slot_key == 'job_date':
+            value = userexits.pre_process_query_value(slot_key, slot_values[slot_key])
+            where_clause += JOB_DONE_DATE.format('DL.end_date',value)
         if slot_values[slot_key] is not None:
             value = userexits.pre_process_query_value(slot_key, slot_values[slot_key])
             where_clause += JOB_DONE_WHERE.format(bibot.DIMENSIONS.get(dimension).get('column'), value)
