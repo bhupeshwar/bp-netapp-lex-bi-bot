@@ -25,7 +25,7 @@ import bibot_userexits as userexits
 # SELECT statement for JOB_RAN query
 JOB_RAN_SELECT = "SELECT count(DL.dl_name) from BA_DL as DL"
 JOB_RAN_JOIN = " WHERE "
-JOB_RAN_DATE = " AND date_format({}, '%Y-%m-%d')  =  date_format(timestamp'{}', '%Y-%m-%d') "
+JOB_RAN_DATE = "  date_format({}, '%Y-%m-%d')  =  date_format(timestamp'{}', '%Y-%m-%d') "
 JOB_RAN_WHERE = " AND LOWER({}) LIKE LOWER('%{}%') "
 JOB_RAN_PHRASE = 'job ran'
 
@@ -90,7 +90,7 @@ def jobdone_intent_handler(intent_request, session_attributes):
                 where_clause += JOB_RAN_WHERE.format(bibot.DIMENSIONS.get(dimension).get('column'), value)
 
     query_string = select_clause + where_clause
-
+    """
     count = query_string
     """
     response = helpers.execute_athena_query(query_string)
@@ -100,7 +100,7 @@ def jobdone_intent_handler(intent_request, session_attributes):
         count = result['VarCharValue']
     else:
         count = 0
-"""
+
 
     logger.debug('<<BIBot>> "Count value is: %s' % count)
 
