@@ -3,7 +3,9 @@
         "description": "Names of DL in job_details database",
         "valueSelectionStrategy": "TOP_RESOLUTION",
         "enumerationValues": [
-           { "value": "Sample DL 1" },
-           { "value": "Another Sample DL" }
+          { "value": "US Post Revenue Load" },
+          { "value": "US Revenue" },
+          { "value": "EMEA" },
+          { "value": "BBSBR" }
 	 ]
 }
