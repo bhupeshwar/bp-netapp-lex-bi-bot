@@ -24,7 +24,7 @@ import bibot_userexits as userexits
 
 # SELECT statement for JOB_DONE query
 JOB_DONE_SELECT = "SELECT count(DL.dl_name) from BA_DL as DL"
-JOB_DONE_JOIN = " WHERE DL.status != 'W'  "
+JOB_DONE_JOIN = " WHERE DL.status != 'W' AND date_format(DL.end_date, '%Y-%m-%d')  =  date_format(timestamp'2019-02-07', '%Y-%m-%d')  "
 JOB_DONE_WHERE = " AND LOWER({}) LIKE LOWER('%{}%') "
 JOB_DONE_PHRASE = 'job done'
 

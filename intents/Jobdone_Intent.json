@@ -17,7 +17,8 @@
           "type": "CodeHook"
         },
         "sampleUtterances": [
-          "Is {dl_name} jobs completed {job_date}"
+          "Were {dl_name} jobs completed on {job_date}",
+					"Were {dl_name} jobs completed"
           ],
     "slots": [
         {
