@@ -15,5 +15,19 @@
             ],
             "value": "template_name"
         }
+        ,
+        {
+            "synonyms": [
+                "dl_date"
+            ],
+            "value": "dl_date"
+        }
+        ,
+        {
+            "synonyms": [
+                "job_date"
+            ],
+            "value": "job_date"
+        }
     ]
 }
