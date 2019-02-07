@@ -24,7 +24,7 @@ import bibot_userexits as userexits
 
 # SELECT statement for JOB_DONE query
 JOB_DONE_SELECT = "SELECT end_date from BA_DL as DL"
-JOB_DONE_JOIN = " WHERE date_format(DL.end_date, '%Y-%m-%d')  =  date_format(timestamp'{}', '%Y-%m-%d') AND DL.status != 'W' "
+JOB_DONE_JOIN = " WHERE DL.status != 'W' "
 JOB_DONE_WHERE = " AND LOWER({}) LIKE LOWER('%{}%') "
 JOB_DONE_PHRASE = 'job completion date/time'
 
