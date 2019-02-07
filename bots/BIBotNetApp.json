@@ -12,7 +12,7 @@
         },
         {
             "intentVersion": "$LATEST",
-	           "intentName": "Jobdonetoday_Intent"
+	           "intentName": "Jobran_Intent"
         },
         {
             "intentVersion": "$LATEST",
