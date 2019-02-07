@@ -23,8 +23,9 @@ import bibot_helpers as helpers
 import bibot_userexits as userexits
 
 # SELECT statement for JOB_DONE query
-JOB_DONE_SELECT = "SELECT end_date from BA_DL as DL"
+JOB_DONE_SELECT = "SELECT DL.end_date from BA_DL as DL"
 JOB_DONE_JOIN = " WHERE DL.status != 'W' "
+JOB_DONE_DATE = " AND date_format({}, '%Y-%m-%d')  =  date_format(timestamp'{}', '%Y-%m-%d') "
 JOB_DONE_WHERE = " AND LOWER({}) LIKE LOWER('%{}%') "
 JOB_DONE_PHRASE = 'job completion date/time'
 
@@ -79,6 +80,9 @@ def jobdone_intent_handler(intent_request, session_attributes):
     where_clause = JOB_DONE_JOIN
     for dimension in bibot.DIMENSIONS:
         slot_key = bibot.DIMENSIONS.get(dimension).get('slot')
+        if slot_key == 'my_date':
+            value = userexits.pre_process_query_value(slot_key, slot_values[slot_key])
+            where_clause += JOB_DONE_DATE.format(bibot.DIMENSIONS.get(dimension).get('column'), value)
         if slot_values[slot_key] is not None:
             value = userexits.pre_process_query_value(slot_key, slot_values[slot_key])
             where_clause += JOB_DONE_WHERE.format(bibot.DIMENSIONS.get(dimension).get('column'), value)
@@ -107,7 +111,7 @@ def jobdone_intent_handler(intent_request, session_attributes):
         logger.debug('<<BIBot>> pre top5_formatter[%s] = %s', slot_key, slot_values.get(slot_key))
         if slot_values.get(slot_key) is not None:
             # the DIMENSION_FORMATTERS perform a post-process functions and then format the output
-            # Example:  {... 'venue_state': {'format': ' in the state of {}',  'function': get_state_name}, ...}
+            # Example:  {... 'my_date': {'format': ' in the date of {}',  'function': get_state_name}, ...}
             if userexits.DIMENSION_FORMATTERS.get(slot_key) is not None:
                 output_text = userexits.DIMENSION_FORMATTERS[slot_key]['function'](slot_values.get(slot_key))
                 response_string += ' ' + userexits.DIMENSION_FORMATTERS[slot_key]['format'].lower().format(output_text)
