@@ -32,7 +32,7 @@ SLOT_CONFIG = {
 }
 
 DIMENSIONS = {
-    'dl_name':     {'slot': 'dl_name',  'column': 'dl.dl_name',  'singular': 'event'},
+    'dl_name':     {'slot': 'dl_name',  'column': 'dl.dl_name',  'singular': 'dl_name'},
     'months':     {'slot': 'event_month', 'column': 'd.month',       'singular': 'month'},
     'template_name':     {'slot': 'template_name',  'column': 'dmd.template_name',  'singular': 'template_name'}
 }
