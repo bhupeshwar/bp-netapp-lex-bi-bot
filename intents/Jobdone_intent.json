@@ -1,6 +1,6 @@
 {
 	"name": "Jobdone_Intent",
-        "description": "Recursively query the dataset",
+        "description": "Jobdone_Intent Recursively query the dataset",
         "conclusionStatement": {
           "messages": [
             {
