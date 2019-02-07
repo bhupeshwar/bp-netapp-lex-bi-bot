@@ -22,7 +22,7 @@ import bibot_config as bibot
 import bibot_helpers as helpers
 import bibot_userexits as userexits
 
-# SELECT statement for JOB_DONE query
+# SELECT statement for JOB_RAN query
 JOB_RAN_SELECT = "SELECT count(DL.dl_name) from BA_DL as DL"
 JOB_RAN_JOIN = " WHERE "
 JOB_RAN_DATE = " AND date_format({}, '%Y-%m-%d')  =  date_format(timestamp'{}', '%Y-%m-%d') "
