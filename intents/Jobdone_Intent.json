@@ -18,7 +18,8 @@
         },
         "sampleUtterances": [
           "Is {dl_name} jobs completed on {job_date}",
-					"Is {dl_name} jobs has been completed {job_date}"
+					"Is {dl_name} jobs has been completed {job_date}",
+					"Was ​{dl_name}​ jobs ran on ​{job_date}​"
           ],
     "slots": [
 			{
