@@ -12,7 +12,7 @@
         },
         {
             "intentVersion": "$LATEST",
-	           "intentName": "SubJobdone_Intent"
+	           "intentName": "Subjobdone_Intent"
         },
         {
             "intentVersion": "$LATEST",
