@@ -24,7 +24,7 @@ import bibot_userexits as userexits
 from datetime import datetime
 
 # SELECT statement for JOB_DONE query
-JOB_DONE_SELECT = "SELECT DL.end_date from BA_DL as DL"
+JOB_DONE_SELECT = "SELECT date_format(DL.end_date, '%Y-%m-%d %H:%i:%s') from BA_DL as DL"
 JOB_DONE_JOIN = " WHERE DL.status != 'W'  "
 JOB_DONE_DATE = " AND date_format({}, '%Y-%m-%d')  =  date_format(timestamp'{}', '%Y-%m-%d') "
 JOB_DONE_WHERE = " AND LOWER({}) LIKE LOWER('%{}%') "
@@ -107,7 +107,7 @@ def jobdone_intent_handler(intent_request, session_attributes):
     if count == 0:
         response_string = 'There were no {}'.format(JOB_DONE_PHRASE)
     else:
-        response_string = '{} is {} '.format( JOB_DONE_PHRASE,count.strftime("%m/%d/%Y, %H:%M:%S"))
+        response_string = '{} is {} '.format( JOB_DONE_PHRASE,count)
 
     # add the English versions of the WHERE clauses
     for dimension in bibot.DIMENSIONS:
