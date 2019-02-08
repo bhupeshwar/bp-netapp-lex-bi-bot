@@ -93,12 +93,10 @@ def jobdone_intent_handler(intent_request, session_attributes):
 
     response = helpers.execute_athena_query(query_string)
 
-    result = response['ResultSet']['Rows'][1]
-    """
-    count = response
-    """
-    if result:
-        count = result['Data'][0]['VarCharValue']
+    result = response['ResultSet']['Rows'][1]['Data'][0]
+
+    if result !=null:
+        count = result['VarCharValue']
     else:
         count = 0
 
