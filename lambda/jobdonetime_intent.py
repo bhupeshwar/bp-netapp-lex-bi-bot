@@ -94,12 +94,9 @@ def jobdone_intent_handler(intent_request, session_attributes):
     response = helpers.execute_athena_query(query_string)
 
     result = response['ResultSet']['Rows'][1]['Data'][0]
-
+    count = 0
     if result is not None:
         count = result['VarCharValue']
-    else:
-        count = 0
-
 
     logger.debug('<<BIBot>> "Count value is: %s' % count)
 
