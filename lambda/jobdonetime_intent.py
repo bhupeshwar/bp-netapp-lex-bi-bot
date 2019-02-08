@@ -28,7 +28,7 @@ JOB_DONE_SELECT = "SELECT date_format(DL.end_date, '%Y-%m-%d %H:%i:%s') from BA_
 JOB_DONE_JOIN = " WHERE DL.status != 'W'  "
 JOB_DONE_DATE = " AND date_format({}, '%Y-%m-%d')  =  date_format(timestamp'{}', '%Y-%m-%d') "
 JOB_DONE_WHERE = " AND LOWER({}) LIKE LOWER('%{}%') "
-JOB_DONE_PHRASE = 'job completion date/time'
+JOB_DONE_PHRASE = 'Job completion date/time'
 
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
