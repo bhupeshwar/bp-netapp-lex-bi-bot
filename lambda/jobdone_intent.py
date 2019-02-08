@@ -97,11 +97,11 @@ def jobdone_intent_handler(intent_request, session_attributes):
     if result:
         count = result['VarCharValue']
         # build response string
-        if count == 0:
+        if count == '0':
             response_string = 'There were no {}'.format(JOB_DONE_PHRASE)
         else:
             response_string = 'There were {} {}'.format(count, JOB_DONE_PHRASE)
-    
+
     logger.debug('<<BIBot>> "Count value is: %s' % count)
 
 
