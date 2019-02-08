@@ -95,7 +95,7 @@ def jobdone_intent_handler(intent_request, session_attributes):
 
     result = response['ResultSet']['Rows'][1]['Data'][0]
 
-    if result !=null:
+    if result is not None:
         count = result['VarCharValue']
     else:
         count = 0
