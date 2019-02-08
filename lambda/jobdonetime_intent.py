@@ -106,7 +106,7 @@ def jobdone_intent_handler(intent_request, session_attributes):
     if count == 0:
         response_string = 'There were no {}'.format(JOB_DONE_PHRASE)
     else:
-        response_string = '{} is {} result_count- {}'.format( JOB_DONE_PHRASE,count,result_count)
+        response_string = '{} is {} '.format( JOB_DONE_PHRASE,count)
 
     # add the English versions of the WHERE clauses
     for dimension in bibot.DIMENSIONS:
