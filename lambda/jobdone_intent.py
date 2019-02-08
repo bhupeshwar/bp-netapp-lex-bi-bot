@@ -96,16 +96,15 @@ def jobdone_intent_handler(intent_request, session_attributes):
     result = response['ResultSet']['Rows'][1]['Data'][0]
     if result:
         count = result['VarCharValue']
-    else:
-        count = 0
-
+        # build response string
+        if count == 0:
+            response_string = 'There were no {}'.format(JOB_DONE_PHRASE)
+        else:
+            response_string = 'There were {} {}'.format(count, JOB_DONE_PHRASE)
+    
     logger.debug('<<BIBot>> "Count value is: %s' % count)
 
-    # build response string
-    if count == 0:
-        response_string = 'There were no {}'.format(JOB_DONE_PHRASE)
-    else:
-        response_string = 'There were {} {}'.format(count, JOB_DONE_PHRASE)
+
 
     # add the English versions of the WHERE clauses
     for dimension in bibot.DIMENSIONS:
