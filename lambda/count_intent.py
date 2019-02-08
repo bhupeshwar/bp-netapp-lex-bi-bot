@@ -23,9 +23,9 @@ import bibot_helpers as helpers
 import bibot_userexits as userexits
 
 # SELECT statement for Count query
-COUNT_SELECT = "select count(DMD.template_Name) from BA_DL as DL "
-COUNT_JOIN = " WHERE dl.template_id = (select distinct(dmd.template_id) from BA_DASHBOARD_MASTER_DETAILS as DMD where lower(dmd.template_name) "
-COUNT_WHERE = " AND LOWER({}) LIKE LOWER('%{}%') )"
+COUNT_SELECT = "SELECT count(dl.dl_name) from ba_dl as dl "
+COUNT_JOIN = " WHERE 1=1 "
+COUNT_WHERE = " AND LOWER({}) LIKE LOWER('%{}%') "
 COUNT_PHRASE = 'job ran'
 
 logger = logging.getLogger()
