@@ -17,10 +17,8 @@
           "type": "CodeHook"
         },
         "sampleUtterances": [
-          "How many {dl_name} jobs were ran for {template_name}",
           "Total {dl_name} jobs ran in {event_month}",
-          "Total {dl_name} jobs ran",
-          "How many jobs were ran for {template_name}"
+          "How many jobs were ran for {dl_name}"
         ],
     "slots": [
         {
@@ -57,24 +55,6 @@
             "priority": 2,
             "sampleUtterances": [],
             "description": "event_month"
-        },
-        {
-            "slotType": "template_name",
-            "name": "template_name",
-            "slotConstraint": "Optional",
-            "valueElicitationPrompt": {
-                "maxAttempts": 2,
-                "messages": [
-                    {
-                        "content": "The type of event",
-                        "contentType": "PlainText"
-                    }
-                ]
-            },
-            "priority": 6,
-            "slotTypeVersion": "$LATEST",
-            "sampleUtterances": [],
-            "description": "template_name"
         }
     ]
 }
