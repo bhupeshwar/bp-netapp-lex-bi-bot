@@ -20,10 +20,7 @@
           "How many {dl_name} jobs were ran for {template_name}",
           "Total {dl_name} jobs ran in {event_month}",
           "Total {dl_name} jobs ran",
-
-          "How many jobs were ran for {template_name}",
-
-					"How many tickets were sold"
+          "How many jobs were ran for {template_name}"
         ],
     "slots": [
         {
