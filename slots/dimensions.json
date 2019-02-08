@@ -11,6 +11,12 @@
         },
         {
             "synonyms": [
+                "sequence_name"
+            ],
+            "value": "sequence_name"
+        },
+        {
+            "synonyms": [
                 "template_name"
             ],
             "value": "template_name"

@@ -9,7 +9,11 @@
         {
             "intentVersion": "$LATEST",
 	           "intentName": "Count_Intent"
-        },        
+        },
+        {
+            "intentVersion": "$LATEST",
+	           "intentName": "SubJobdone_Intent"
+        },
         {
             "intentVersion": "$LATEST",
 	           "intentName": "Jobdone_Intent"

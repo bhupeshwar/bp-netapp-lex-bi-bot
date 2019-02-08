@@ -22,16 +22,18 @@ SLOT_CONFIG = {
     'dl_name':       {'type': TOP_RESOLUTION, 'remember': True,  'error': 'I couldn\'t find an DL called "{}".'},
     'month':      {'type': ORIGINAL_VALUE, 'remember': True},
     'dl_date':      {'type': ORIGINAL_VALUE, 'remember': True},
+    'sequence_name':      {'type': ORIGINAL_VALUE, 'remember': True},
     'job_date':      {'type': ORIGINAL_VALUE, 'remember': True},
     'template_name':         {'type': TOP_RESOLUTION, 'remember': True,  'error': 'I couldn\'t find a template called "{}".'},
     'count':            {'type': ORIGINAL_VALUE, 'remember': True},
-    'dimension':        {'type': ORIGINAL_VALUE, 'remember': True}    
+    'dimension':        {'type': ORIGINAL_VALUE, 'remember': True}
 }
 
 DIMENSIONS = {
     'dl_name':     {'slot': 'dl_name',  'column': 'dl.dl_name',  'singular': 'dl_name'},
     'month':     {'slot': 'dl_date', 'column': 'd.month',       'singular': 'month'},
     'dl_date':     {'slot': 'dl_date', 'column': 'dl.end_date',       'singular': 'dl_date'},
+    'sequence_name':     {'slot': 'sequence_name', 'column': 'dmd.sequence_name',       'singular': 'sequence_name'},
     'job_date':     {'slot': 'job_date', 'column': 'dl.end_date',       'singular': 'job_date'},
     'template_name':     {'slot': 'template_name',  'column': 'dmd.template_name',  'singular': 'template_name'}
 }
