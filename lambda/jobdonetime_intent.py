@@ -92,19 +92,21 @@ def jobdone_intent_handler(intent_request, session_attributes):
     query_string = select_clause + where_clause
 
     response = helpers.execute_athena_query(query_string)
+    result_count = len(response['ResultSet']['Rows']) - 1
+    if(result_count == 1 ):
+        result = response['ResultSet']['Rows'][1]['Data'][0]
 
-    result = response['ResultSet']['Rows'][1]['Data'][0]
-    count = 0
-    if result is not None:
-        count = result['VarCharValue']
-
-    logger.debug('<<BIBot>> "Count value is: %s' % count)
+        if result is not None:
+            count = result['VarCharValue']
+    else:
+        count = 0
+        logger.debug('<<BIBot>> "Count value is: %s' % count)
 
     # build response string
     if count == 0:
         response_string = 'There were no {}'.format(JOB_DONE_PHRASE)
     else:
-        response_string = '{} is {}'.format( JOB_DONE_PHRASE,count)
+        response_string = '{} is {} result_count- {}'.format( JOB_DONE_PHRASE,count,result_count)
 
     # add the English versions of the WHERE clauses
     for dimension in bibot.DIMENSIONS:
