@@ -90,17 +90,18 @@ def jobdone_intent_handler(intent_request, session_attributes):
                 where_clause += JOB_DONE_WHERE.format(bibot.DIMENSIONS.get(dimension).get('column'), value)
 
     query_string = select_clause + where_clause
-    """
-    count = query_string
-    """
+
     response = helpers.execute_athena_query(query_string)
 
     result = response['ResultSet']['Rows'][1]['Data'][0]
+
+    count = result['VarCharValue']
+    """
     if result:
         count = result['VarCharValue']
     else:
         count = 0
-
+    """
 
     logger.debug('<<BIBot>> "Count value is: %s' % count)
 
