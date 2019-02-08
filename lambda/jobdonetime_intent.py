@@ -21,6 +21,7 @@ import json
 import bibot_config as bibot
 import bibot_helpers as helpers
 import bibot_userexits as userexits
+from datetime import datetime
 
 # SELECT statement for JOB_DONE query
 JOB_DONE_SELECT = "SELECT DL.end_date from BA_DL as DL"
@@ -106,7 +107,7 @@ def jobdone_intent_handler(intent_request, session_attributes):
     if count == 0:
         response_string = 'There were no {}'.format(JOB_DONE_PHRASE)
     else:
-        response_string = '{} is {} '.format( JOB_DONE_PHRASE,count)
+        response_string = '{} is {} '.format( JOB_DONE_PHRASE,count.strftime("%m/%d/%Y, %H:%M:%S"))
 
     # add the English versions of the WHERE clauses
     for dimension in bibot.DIMENSIONS:
