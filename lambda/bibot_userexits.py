@@ -64,6 +64,7 @@ def get_month_name(value):
 
 DIMENSION_FORMATTERS = {
     'dl_name':  {'format': 'For {}',              'function': str.title},
+    'sequence_name':  {'format': 'For {}',              'function': str.title},
     'job_date':  {'format': 'On {}',              'function': str.title},
     'event_month': {'format': 'In the month of {}',  'function': get_month_name},
     'template_name':    {'format': 'For {}',              'function': str.title}

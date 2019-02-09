@@ -23,11 +23,11 @@ import bibot_helpers as helpers
 import bibot_userexits as userexits
 
 # SELECT statement for SUBJOB_DONE query
-SUBJOB_DONE_SELECT = "SELECT count(dmd.SEQUENCE_NAME)  FROM ba_dashboard_master_details dmd , ba_dl dl"
+SUBJOB_DONE_SELECT = "SELECT count(dmd.sequence_name)  FROM ba_dashboard_master_details dmd , ba_dl dl"
 SUBJOB_DONE_JOIN = " WHERE DL.status != 'W' "
 SUBJOB_DONE_DATE = " AND date_format({}, '%Y-%m-%d')  =  date_format(timestamp'{}', '%Y-%m-%d') "
 SUBJOB_DONE_WHERE = " AND LOWER({}) LIKE LOWER('%{}%') "
-SUBJOB_DONE_GROUPBY = " GROUP BY dl.end_date , dmd.SEQUENCE_NAME ; "
+SUBJOB_DONE_GROUPBY = " GROUP BY dl.end_date , dmd.sequence_name ; "
 SUBJOB_DONE_PHRASE = 'Sequence done'
 
 logger = logging.getLogger()
