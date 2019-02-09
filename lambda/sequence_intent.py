@@ -28,7 +28,7 @@ SUBJOB_DONE_JOIN = " WHERE DL.status != 'W' "
 SUBJOB_DONE_DATE = " AND date_format({}, '%Y-%m-%d')  =  date_format(timestamp'{}', '%Y-%m-%d') "
 SUBJOB_DONE_WHERE = " AND LOWER({}) LIKE LOWER('%{}%') "
 SUBJOB_DONE_GROUPBY = " GROUP BY dl.end_date , dmd.SEQUENCE_NAME ; "
-SUBJOB_DONE_PHRASE = 'Sub Job done'
+SUBJOB_DONE_PHRASE = 'Sequence done'
 
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
