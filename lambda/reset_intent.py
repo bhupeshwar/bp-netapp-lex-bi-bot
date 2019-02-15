@@ -59,7 +59,7 @@ def reset_intent_handler(intent_request, session_attributes):
         if key == 'dimension':    # see below
             continue
         if config.get('remember', False):
-            if slots_to_reset.get(key):        # asking to reset JOB_DONE: los angeles for example
+            if slots_to_reset.get(key):        # asking to reset JOB_DONE
                 if slot_values.get(key):
                     value = userexits.post_process_dimension_output(key, slot_values.get(key))
                     dimensions_reset += ' {}'.format(value.title())
