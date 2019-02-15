@@ -1,12 +1,12 @@
 #
-# Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-# 
+# Copyright 2019  UST-global.com, Inc. or its affiliates. All Rights Reserved.
+#
 # Permission is hereby granted, free of charge, to any person obtaining a copy of this
 # software and associated documentation files (the "Software"), to deal in the Software
 # without restriction, including without limitation the rights to use, copy, modify,
 # merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
 # permit persons to whom the Software is furnished to do so.
-# 
+#
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
 # INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
 # PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
@@ -34,7 +34,7 @@ def lambda_handler(event, context):
     config_error = helpers.get_bibot_config()
     if config_error is not None:
         return helpers.close(session_attributes, 'Fulfilled',
-            {'contentType': 'PlainText', 'content': config_error})   
+            {'contentType': 'PlainText', 'content': config_error})
     else:
         return goodbye_intent_handler(event, session_attributes)
 
@@ -58,5 +58,4 @@ def goodbye_intent_handler(intent_request, session_attributes):
     slot_values = {key: None for key in bibot.SLOT_CONFIG}
     helpers.remember_slot_values(slot_values, session_attributes)
 
-    return helpers.close(session_attributes, 'Fulfilled', {'contentType': 'PlainText','content': response_string})   
-
+    return helpers.close(session_attributes, 'Fulfilled', {'contentType': 'PlainText','content': response_string})
