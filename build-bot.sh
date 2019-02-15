@@ -1,6 +1,7 @@
 #!/bin/bash
 
 #
+# @Author : Bhupeshwar Singh Pathania
 # Builds the bot, intents, and custom slot types
 #
 
@@ -30,7 +31,7 @@ do
     #     --role $LAMBDA_ROLE_ARN \
     #     --handler ${module_name}.lambda_handler \
     #     --runtime python3.6 \
-    #     --environment "Variables={ATHENA_DB=$ATHENA_DB,ATHENA_OUTPUT_LOCATION=$ATHENA_OUTPUT_LOCATION}" 
+    #     --environment "Variables={ATHENA_DB=$ATHENA_DB,ATHENA_OUTPUT_LOCATION=$ATHENA_OUTPUT_LOCATION}"
 
     aws lambda create-function \
         --function-name ${LAMBDA}_${i} \
@@ -48,7 +49,7 @@ do
     #     --function-name ${LAMBDA}_${i} \
     #     --statement-id chatbot-fulfillment \
     #     --action "lambda:InvokeFunction" \
-    #     --principal "lex.amazonaws.com" 
+    #     --principal "lex.amazonaws.com"
 
     aws lambda add-permission \
         --function-name ${LAMBDA}_${i} \
@@ -63,7 +64,7 @@ done
 for i in $SLOTS
 do
 	echo "Creating slot type: $i"
-	aws lex-models put-slot-type --name $i --cli-input-json file://slots/$i.json >/dev/null 
+	aws lex-models put-slot-type --name $i --cli-input-json file://slots/$i.json >/dev/null
 done
 
 # build the intents
@@ -76,14 +77,12 @@ do
 
         sed "s/{{lambda-arn}}/$LAMBDA_ARN/" intents/$i.json >intents/$i-updated.json
         # echo "ARN for $i = `grep -i arn intents/$i-updated.json`"
-	aws lex-models put-intent --name $i --cli-input-json file://intents/$i-updated.json >/dev/null 
+	aws lex-models put-intent --name $i --cli-input-json file://intents/$i-updated.json >/dev/null
 done
 
-# build the bot 
+# build the bot
 echo "Creating bot: $BOT"
 if aws lex-models put-bot --name $BOT --cli-input-json file://bots/$BOT.json >/dev/null
 then echo "Success: $BOT bot build complete."; exit 0
 else echo "Error: $BOT bot build failed, check the log for errors"; exit 1
 fi
-
-

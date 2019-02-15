@@ -1,6 +1,7 @@
 #!/bin/bash
 
 #
+# @Author : Bhupeshwar Singh Pathania
 # Creates the Athena database
 #
 
