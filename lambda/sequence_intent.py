@@ -29,8 +29,8 @@ SUBJOB_DONE_SELECT = "SELECT count(dmd.sequence_name)  FROM ba_dashboard_master_
 SUBJOB_DONE_JOIN = " WHERE DL.status != 'W' "
 SUBJOB_DONE_DATE = " AND date_format({}, '%Y-%m-%d')  =  date_format(timestamp'{}', '%Y-%m-%d') "
 SUBJOB_DONE_WHERE = " AND LOWER({}) LIKE LOWER('%{}%') "
-SUBJOB_DONE_GROUPBY = " GROUP BY dl.end_date , dmd.sequence_name ; "
-SUBJOB_DONE_PHRASE = 'Sequence done'
+SUBJOB_DONE_GROUPBY = " GROUP BY dl.end_date , dmd.sequence_name "
+SEQUENCE_DONE_PHRASE = "Sequence done"
 
 """
 
@@ -38,8 +38,8 @@ SEQUENCE_DONE_SELECT = "SELECT count(dlb.OBJECT_NAME)  FROM ba_dashboard_master_
 SEQUENCE_DONE_JOIN = " JOIN ba_dl_baseline dlb on dmd.BASELINE_ID = dlb.BASELINE_ID JOIN ba_dl_details dld on  dld.BASELINE_ID = dlb.BASELINE_ID WHERE DL.status != 'W' "
 SEQUENCE_DONE_DATE = " AND date_format({}, '%Y-%m-%d')  =  date_format(timestamp'{}', '%Y-%m-%d') "
 SEQUENCE_DONE_WHERE = " AND LOWER({}) LIKE LOWER('%{}%') "
-SEQUENCE_DONE_GROUPBY = " GROUP BY dld.end_time , dlb.OBJECT_NAME ; "
-SEQUENCE_DONE_PHRASE = 'Sequence done'
+SEQUENCE_DONE_GROUPBY = " GROUP BY dld.end_time , dlb.OBJECT_NAME "
+SEQUENCE_DONE_PHRASE = "Sequence done"
 
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
@@ -95,9 +95,9 @@ def sequence_intent_handler(intent_request, session_attributes):
         if slot_key == 'job_date':
             if slot_values[slot_key] is not None:
                 value = userexits.pre_process_query_value(slot_key, slot_values[slot_key])
-                where_clause += SEQUENCE_DONE_DATE.format('DL.end_date',value)
-        if slot_values[slot_key] is not None:
-            if slot_key != 'job_date':
+                where_clause += SEQUENCE_DONE_DATE.format(bibot.DIMENSIONS.get(dimension).get('column'), value)
+        if slot_key != 'job_date':
+            if slot_values[slot_key] is not None:            
                 value = userexits.pre_process_query_value(slot_key, slot_values[slot_key])
                 where_clause += SEQUENCE_DONE_WHERE.format(bibot.DIMENSIONS.get(dimension).get('column'), value)
 
