@@ -89,6 +89,8 @@ def count_intent_handler(intent_request, session_attributes):
     response = helpers.execute_athena_query(query_string)
 
     result = response['ResultSet']['Rows'][1]['Data'][0]
+
+    """
     if result:
         count = result['VarCharValue']
     else:
@@ -98,10 +100,11 @@ def count_intent_handler(intent_request, session_attributes):
 
     # build response string
     if count == 0:
-        response_string = 'There were no {}'.format(query_string)
+        response_string = 'There were no {}'.format(COUNT_PHRASE)
     else:
-        response_string = 'There were {} {}'.format(count, query_string)
-
+        response_string = 'There were {} {}'.format(count, COUNT_PHRASE)
+    """
+    response_string = query_string
     # add the English versions of the WHERE clauses
     for dimension in bibot.DIMENSIONS:
         slot_key = bibot.DIMENSIONS[dimension].get('slot')
