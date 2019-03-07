@@ -37,6 +37,13 @@
         ,
         {
             "synonyms": [
+                "clone_name"
+            ],
+            "value": "clone_name"
+        }
+        ,
+        {
+            "synonyms": [
                 "job_date"
             ],
             "value": "job_date"

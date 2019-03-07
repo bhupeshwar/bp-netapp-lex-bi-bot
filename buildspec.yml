@@ -9,6 +9,7 @@ phases:
       - echo Build started on `date`
       - cd lambda
       - python ../zip.py ../Count_Intent.zip count_intent.py bibot_config.py bibot_helpers.py bibot_userexits.py
+      - python ../zip.py ../Clone_Intent.zip clone_intent.py bibot_config.py bibot_helpers.py bibot_userexits.py
       - python ../zip.py ../Jobdone_Intent.zip jobdone_intent.py bibot_config.py bibot_helpers.py bibot_userexits.py
       - python ../zip.py ../Sequence_Intent.zip sequence_intent.py bibot_config.py bibot_helpers.py bibot_userexits.py
       - python ../zip.py ../Jobdonetime_Intent.zip jobdonetime_intent.py bibot_config.py bibot_helpers.py bibot_userexits.py
