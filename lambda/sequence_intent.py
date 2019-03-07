@@ -110,9 +110,9 @@ def sequence_intent_handler(intent_request, session_attributes):
         count = result['VarCharValue']
         # build response string
         if count == '0':
-            response_string = 'There were no {}'.format(SEQUENCE_DONE_PHRASE)
+            response_string = 'There were no {}'.format(query_string)
         else:
-            response_string = 'Yes, there were {} {}'.format(count, SEQUENCE_DONE_PHRASE)
+            response_string = 'Yes, there were {} {}'.format(count, query_string)
 
     logger.debug('<<BIBot>> "Count value is: %s' % count)
 
