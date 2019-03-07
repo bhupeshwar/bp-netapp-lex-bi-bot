@@ -25,11 +25,11 @@ import bibot_userexits as userexits
 
 # SELECT statement for SEQUENCE_DONE
 """
-SUBJOB_DONE_SELECT = "SELECT count(dmd.sequence_name)  FROM ba_dashboard_master_details dmd , ba_dl dl"
-SUBJOB_DONE_JOIN = " WHERE DL.status != 'W' "
-SUBJOB_DONE_DATE = " AND date_format({}, '%Y-%m-%d')  =  date_format(timestamp'{}', '%Y-%m-%d') "
-SUBJOB_DONE_WHERE = " AND LOWER({}) LIKE LOWER('%{}%') "
-SUBJOB_DONE_GROUPBY = " GROUP BY dl.end_date , dmd.sequence_name "
+SEQUENCE_DONE_SELECT = "SELECT count(dmd.sequence_name)  FROM ba_dashboard_master_details dmd , ba_dl dl"
+SEQUENCE_DONE_JOIN = " WHERE DL.status != 'W' "
+SEQUENCE_DONE_DATE = " AND date_format({}, '%Y-%m-%d')  =  date_format(timestamp'{}', '%Y-%m-%d') "
+SEQUENCE_DONE_WHERE = " AND LOWER({}) LIKE LOWER('%{}%') "
+SEQUENCE_DONE_GROUPBY = " GROUP BY dl.end_date , dmd.sequence_name "
 SEQUENCE_DONE_PHRASE = "Sequence done"
 
 """
@@ -97,12 +97,12 @@ def sequence_intent_handler(intent_request, session_attributes):
                 value = userexits.pre_process_query_value(slot_key, slot_values[slot_key])
                 where_clause += SEQUENCE_DONE_DATE.format(bibot.DIMENSIONS.get(dimension).get('column'), value)
         if slot_key != 'job_date':
-            if slot_values[slot_key] is not None:            
+            if slot_values[slot_key] is not None:
                 value = userexits.pre_process_query_value(slot_key, slot_values[slot_key])
                 where_clause += SEQUENCE_DONE_WHERE.format(bibot.DIMENSIONS.get(dimension).get('column'), value)
 
     query_string = select_clause + where_clause + SEQUENCE_DONE_GROUPBY
-    """
+
     response = helpers.execute_athena_query(query_string)
 
     result = response['ResultSet']['Rows'][1]['Data'][0]
@@ -116,8 +116,7 @@ def sequence_intent_handler(intent_request, session_attributes):
             response_string = 'Yes, there were {} {}'.format(count, SEQUENCE_DONE_PHRASE
 
 
-    """
-    response_string = query_string
+    #response_string = query_string
     logger.debug('<<BIBot>> "Count value is: %s' % count)
 
 
