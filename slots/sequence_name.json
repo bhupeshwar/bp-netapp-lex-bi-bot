@@ -1,9 +1,9 @@
 {
         "name": "sequence_name",
-        "description": "Names of Sequence in job_details database",
+        "description": "Names of Object in job_details database",
         "valueSelectionStrategy": "TOP_RESOLUTION",
         "enumerationValues": [
-          { "value": "Sequence name 1" },
-          { "value": "Sequence name 2" }
+          { "value": "Object name 1" },
+          { "value": "Object name 2" }
 	 ]
 }

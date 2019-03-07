@@ -17,7 +17,7 @@
           "type": "CodeHook"
         },
         "sampleUtterances": [
-          "When did a {dl_name} jobs complete on {job_date}"
+          "When did a {dl_name} jobs complete on {dl_date}"
           ],
     "slots": [
         {
@@ -40,7 +40,7 @@
         },
 				{
 					"slotType": "AMAZON.DATE",
-					"name": "job_date",
+					"name": "dl_date",
             "slotConstraint": "Optional",
             "valueElicitationPrompt": {
                 "maxAttempts": 2,
@@ -53,7 +53,7 @@
             },
             "priority": 2,
             "sampleUtterances": [],
-            "description": "job_date"
+            "description": "dl_date"
         }
     ]
 }
