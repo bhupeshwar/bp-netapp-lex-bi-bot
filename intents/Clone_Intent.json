@@ -17,7 +17,7 @@
           "type": "CodeHook"
         },
         "sampleUtterances": [
-        "When did a {clone_name} jobs complete on {job_date}"
+        "When did the clone of a {clone_name} jobs complete on {job_date}"
           ],
     "slots": [
 			{

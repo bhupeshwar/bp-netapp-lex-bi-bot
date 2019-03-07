@@ -17,9 +17,9 @@
           "type": "CodeHook"
         },
         "sampleUtterances": [
-          "Was {sequence_name} jobs completed on {job_date}",
-					"Is {sequence_name} jobs has been completed {job_date}",
-					"Was {sequence_name} jobs ran on {job_date}"
+          "Was sequence of {sequence_name} jobs completed on {job_date}",
+					"Is sequence of {sequence_name} jobs has been completed {job_date}",
+					"Was sequence of {sequence_name} jobs ran on {job_date}"
           ],
     "slots": [
 						{
