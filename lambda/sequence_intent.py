@@ -102,11 +102,11 @@ def sequence_intent_handler(intent_request, session_attributes):
                 where_clause += SEQUENCE_DONE_WHERE.format(bibot.DIMENSIONS.get(dimension).get('column'), value)
 
     query_string = select_clause + where_clause + SEQUENCE_DONE_GROUPBY
-
+    """
     response = helpers.execute_athena_query(query_string)
 
     result = response['ResultSet']['Rows'][1]['Data'][0]
-    """
+
     if result:
         count = result['VarCharValue']
         # build response string
