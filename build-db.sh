@@ -36,7 +36,7 @@ aws athena start-query-execution \
 # Create JOB_DETAILS ba_dl_baseline table in Athena
 echo "Creating ba_dl_baseline table..."
 aws athena start-query-execution \
-    --query-string "create external table ba_dl_baseline (baseline_id INT, object_name STRING, description STRING, baseline_min INT, category STRING, subcategory STRING, notes STRING, attribute1 STRING,attribute2 STRING,attribute3 STRING,attribute4 STRING,attribute5 STRING,attribute6 STRING,attribute7 INT,attribute8 INT,attribute9 INT,created_by STRING, created_date STRING, last_updated_by STRING, last_updated_date STRING,parent_baseline_id INT) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' LOCATION '$ATHENA_BUCKET/ba_dl_baseline';" \
+    --query-string "create external table ba_dl_baseline (baseline_id INT, object_name STRING, description STRING, baseline_min INT, category STRING, subcategory STRING, notes STRING, attribute1 STRING,attribute2 STRING,attribute3 STRING,attribute4 STRING,attribute5 STRING,attribute6 STRING,attribute7 INT,attribute8 INT,attribute9 INT,created_by STRING, created_date TIMESTAMP, last_updated_by STRING, last_updated_date TIMESTAMP,parent_baseline_id INT) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' LOCATION '$ATHENA_BUCKET/ba_dl_baseline';" \
     --query-execution-context "Database=$ATHENA_DB" \
     --result-configuration "OutputLocation=$ATHENA_BUCKET/output/" \
     >/dev/null
@@ -44,7 +44,7 @@ aws athena start-query-execution \
 # Create JOB_DETAILS ba_dl_details table in Athena
 echo "Creating ba_dl_details table..."
 aws athena start-query-execution \
-    --query-string "create external table ba_dl_details (dl_detail_id INT, dl_id INT, sequence_num INT, baseline_id INT,start_time STRING, end_time STRING, issue_count INT, time_lost_mins INT, notes STRING, attribute1 STRING,attribute2 STRING,attribute3 STRING,attribute4 STRING,attribute5 STRING,attribute6 STRING,attribute7 INT,attribute8 INT,attribute9 INT,created_by STRING, created_date STRING, last_updated_by STRING, last_updated_date STRING, template_id INT) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' LOCATION '$ATHENA_BUCKET/ba_dl_details';" \
+    --query-string "create external table ba_dl_details (dl_detail_id INT, dl_id INT, sequence_num INT, baseline_id INT,start_time TIMESTAMP, end_time TIMESTAMP, issue_count INT, time_lost_mins INT, notes STRING, attribute1 STRING,attribute2 STRING,attribute3 STRING,attribute4 STRING,attribute5 STRING,attribute6 STRING,attribute7 INT,attribute8 INT,attribute9 INT,created_by STRING, created_date TIMESTAMP, last_updated_by STRING, last_updated_date TIMESTAMP, template_id INT) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' LOCATION '$ATHENA_BUCKET/ba_dl_details';" \
     --query-execution-context "Database=$ATHENA_DB" \
     --result-configuration "OutputLocation=$ATHENA_BUCKET/output/" \
     >/dev/null

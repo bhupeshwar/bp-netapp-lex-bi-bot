@@ -17,6 +17,12 @@
         },
         {
             "synonyms": [
+                "object_name"
+            ],
+            "value": "object_name"
+        },
+        {
+            "synonyms": [
                 "template_name"
             ],
             "value": "template_name"

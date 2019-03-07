@@ -20,10 +20,12 @@ ORIGINAL_VALUE = 0
 TOP_RESOLUTION = 1
 
 SLOT_CONFIG = {
-    'dl_name':       {'type': TOP_RESOLUTION, 'remember': True,  'error': 'I couldn\'t find an DL called "{}".'},
+    'dl_name':       {'type': TOP_RESOLUTION, 'remember': True,  'error': 'I couldn\'t find an DL called
+    'clone_name':       {'type': TOP_RESOLUTION, 'remember': True,  'error': 'I couldn\'t find an DL called "{}".'},
     'month':      {'type': ORIGINAL_VALUE, 'remember': True},
     'dl_date':      {'type': ORIGINAL_VALUE, 'remember': True},
     'sequence_name':     {'type': TOP_RESOLUTION, 'remember': True,  'error': 'I couldn\'t find an Sequence called "{}".'},
+    'object_name':     {'type': TOP_RESOLUTION, 'remember': True,  'error': 'I couldn\'t find an Sequence called "{}".'},
     'job_date':      {'type': ORIGINAL_VALUE, 'remember': True},
     'template_name':         {'type': TOP_RESOLUTION, 'remember': True,  'error': 'I couldn\'t find a template called "{}".'},
     'count':            {'type': ORIGINAL_VALUE, 'remember': True},
@@ -34,8 +36,10 @@ DIMENSIONS = {
     'dl_name':     {'slot': 'dl_name',  'column': 'dl.dl_name',  'singular': 'dl_name'},
     'month':     {'slot': 'dl_date', 'column': 'd.month',       'singular': 'month'},
     'dl_date':     {'slot': 'dl_date', 'column': 'dl.end_date',       'singular': 'dl_date'},
+    'clone_name':     {'slot': 'clone_name',  'column': 'dld.template_id',  'singular': 'clone_name'},
     'sequence_name':     {'slot': 'sequence_name', 'column': 'dmd.sequence_name',       'singular': 'sequence_name'},
-    'job_date':     {'slot': 'job_date', 'column': 'dl.end_date',       'singular': 'job_date'},
+    'object_name':     {'slot': 'object_name', 'column': 'dlb.object_name',       'singular': 'object_name'},
+    'job_date':     {'slot': 'job_date', 'column': 'dld.end_time',       'singular': 'job_date'},
     'template_name':     {'slot': 'template_name',  'column': 'dmd.template_name',  'singular': 'template_name'}
 }
 

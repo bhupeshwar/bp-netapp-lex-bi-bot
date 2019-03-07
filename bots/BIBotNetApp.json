@@ -16,6 +16,10 @@
         },
         {
             "intentVersion": "$LATEST",
+	           "intentName": "Clone_Intent"
+        },
+        {
+            "intentVersion": "$LATEST",
 	           "intentName": "Jobdone_Intent"
         },
         {

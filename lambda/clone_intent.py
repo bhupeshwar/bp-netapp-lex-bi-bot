@@ -19,27 +19,19 @@
 import time
 import logging
 import json
+import re
 import bibot_config as bibot
 import bibot_helpers as helpers
 import bibot_userexits as userexits
 
-# SELECT statement for SUBJOB_DONE
-"""
-SUBJOB_DONE_SELECT = "SELECT count(dmd.sequence_name)  FROM ba_dashboard_master_details dmd , ba_dl dl"
-SUBJOB_DONE_JOIN = " WHERE DL.status != 'W' "
-SUBJOB_DONE_DATE = " AND date_format({}, '%Y-%m-%d')  =  date_format(timestamp'{}', '%Y-%m-%d') "
-SUBJOB_DONE_WHERE = " AND LOWER({}) LIKE LOWER('%{}%') "
-SUBJOB_DONE_GROUPBY = " GROUP BY dl.end_date , dmd.sequence_name ; "
-SUBJOB_DONE_PHRASE = 'Sequence done'
+# SELECT statement for CLONE_JOB_DONE
 
-"""
 
-SEQUENCE_DONE_SELECT = "SELECT count(dlb.OBJECT_NAME)  FROM ba_dashboard_master_details dmd "
-SEQUENCE_DONE_JOIN = " JOIN ba_dl_baseline dlb on dmd.BASELINE_ID = dlb.BASELINE_ID JOIN ba_dl_details dld on  dld.BASELINE_ID = dlb.BASELINE_ID WHERE DL.status != 'W' "
-SEQUENCE_DONE_DATE = " AND date_format({}, '%Y-%m-%d')  =  date_format(timestamp'{}', '%Y-%m-%d') "
-SEQUENCE_DONE_WHERE = " AND LOWER({}) LIKE LOWER('%{}%') "
-SEQUENCE_DONE_GROUPBY = " GROUP BY dld.end_time , dlb.OBJECT_NAME ; "
-SEQUENCE_DONE_PHRASE = 'Sequence done'
+CLONE_JOB_DONE_SELECT = "SELECT date_format(DLD.end_time, '%Y-%m-%d %H:%i:%s') from BA_DL_DETAILS as DLD "
+CLONE_JOB_DONE_JOIN = " WHERE BASELINE_ID in (24,213) "
+CLONE_JOB_DONE_DATE = " AND date_format({}, '%Y-%m-%d')  =  date_format(timestamp'{}', '%Y-%m-%d') "
+CLONE_JOB_DONE_WHERE = " AND LOWER({}) LIKE LOWER('%{}%') "
+CLONE_JOB_DONE_PHRASE = 'Clone done'
 
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
@@ -59,16 +51,16 @@ def lambda_handler(event, context):
         return subjobdone_intent_handler(event, session_attributes)
 
 
-def sequence_intent_handler(intent_request, session_attributes):
+def clone_intent_handler(intent_request, session_attributes):
     method_start = time.perf_counter()
 
-    logger.debug('<<BIBot>> sequence_intent_handler: intent_request = ' + json.dumps(intent_request))
-    logger.debug('<<BIBot>> sequence_intent_handler: session_attributes = ' + json.dumps(session_attributes))
+    logger.debug('<<BIBot>> subjobdone_intent_handler: intent_request = ' + json.dumps(intent_request))
+    logger.debug('<<BIBot>> subjobdone_intent_handler: session_attributes = ' + json.dumps(session_attributes))
 
     session_attributes['greetingCount'] = '1'
     session_attributes['resetCount'] = '0'
     session_attributes['finishedCount'] = '0'
-    session_attributes['lastIntent'] = 'Sequence_Intent'
+    session_attributes['lastIntent'] = 'Clone_Intent'
 
     # Retrieve slot values from the current request
     slot_values = session_attributes.get('slot_values')
@@ -78,30 +70,42 @@ def sequence_intent_handler(intent_request, session_attributes):
     except bibot.SlotError as err:
         return helpers.close(session_attributes, 'Fulfilled', {'contentType': 'PlainText','content': str(err)})
 
-    logger.debug('<<BIBot>> "sequence_intent_handler(): slot_values: %s', slot_values)
+    logger.debug('<<BIBot>> "clone_intent_handler(): slot_values: %s', slot_values)
 
     # Retrieve "remembered" slot values from session attributes
     slot_values = helpers.get_remembered_slot_values(slot_values, session_attributes)
-    logger.debug('<<BIBot>> "sequence_intent_handler(): slot_values afer get_remembered_slot_values: %s', slot_values)
+    logger.debug('<<BIBot>> "clone_intent_handler(): slot_values afer get_remembered_slot_values: %s', slot_values)
 
     # Remember updated slot values
     helpers.remember_slot_values(slot_values, session_attributes)
 
     # build and execute query
-    select_clause = SEQUENCE_DONE_SELECT
-    where_clause = SEQUENCE_DONE_JOIN
+    select_clause = CLONE_JOB_DONE_SELECT
+    where_clause = CLONE_JOB_DONE_JOIN
     for dimension in bibot.DIMENSIONS:
         slot_key = bibot.DIMENSIONS.get(dimension).get('slot')
-        if slot_key == 'job_date':
+        if slot_key == 'template_id':
             if slot_values[slot_key] is not None:
                 value = userexits.pre_process_query_value(slot_key, slot_values[slot_key])
-                where_clause += SEQUENCE_DONE_DATE.format('DL.end_date',value)
+                """
+                if (value.upper() == 'EMEA CLONE'):
+                    template_id_value = 10
+                """
+                if (re.search("^EMEA.*CLONE$", value.upper())):
+                    template_id_value = 10
+                if (re.search("^BBSBR.*CLONE$", value.upper()) || re.search("^BOOKING.*CLONE$", value.upper()) || re.search("^BOOKING.*", value.upper())):
+                    template_id_value = 12
+                if (re.search("^REVENUE.*CLONE$", value.upper())):
+                    template_id_value = 13
+                if (re.search("^POST-US.*CLONE$", value.upper()) || re.search("^POST.*US.*CLONE$", value.upper())):
+                    template_id_value = 14
+                where_clause += CLONE_JOB_DONE_WHERE.format(bibot.DIMENSIONS.get(dimension).get('column'),template_id_value)
         if slot_values[slot_key] is not None:
-            if slot_key != 'job_date':
+            if slot_key != 'template_id':
                 value = userexits.pre_process_query_value(slot_key, slot_values[slot_key])
-                where_clause += SEQUENCE_DONE_WHERE.format(bibot.DIMENSIONS.get(dimension).get('column'), value)
+                where_clause += CLONE_JOB_DONE_DATE.format(bibot.DIMENSIONS.get(dimension).get('column'), value)
 
-    query_string = select_clause + where_clause + SEQUENCE_DONE_GROUPBY
+    query_string = select_clause + where_clause
 
     response = helpers.execute_athena_query(query_string)
 
@@ -110,9 +114,9 @@ def sequence_intent_handler(intent_request, session_attributes):
         count = result['VarCharValue']
         # build response string
         if count == '0':
-            response_string = 'There were no {}'.format(SEQUENCE_DONE_PHRASE)
+            response_string = 'There were no {}'.format(CLONE_JOB_DONE_PHRASE)
         else:
-            response_string = 'Yes, there were {} {}'.format(count, SEQUENCE_DONE_PHRASE)
+            response_string = 'Yes, there were {} {}'.format(count, CLONE_JOB_DONE_PHRASE)
 
     logger.debug('<<BIBot>> "Count value is: %s' % count)
 
