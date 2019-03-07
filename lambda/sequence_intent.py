@@ -95,7 +95,7 @@ def sequence_intent_handler(intent_request, session_attributes):
         if slot_key == 'job_date':
             if slot_values[slot_key] is not None:
                 value = userexits.pre_process_query_value(slot_key, slot_values[slot_key])
-                where_clause += SEQUENCE_DONE_DATE.format(bibot.DIMENSIONS.get(dimension).get('column'), value)
+                where_clause += SEQUENCE_DONE_DATE.format('dld.end_time', value)
         if slot_key != 'job_date':
             if slot_values[slot_key] is not None:
                 value = userexits.pre_process_query_value(slot_key, slot_values[slot_key])
