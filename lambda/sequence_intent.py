@@ -106,7 +106,7 @@ def sequence_intent_handler(intent_request, session_attributes):
     response = helpers.execute_athena_query(query_string)
 
     result = response['ResultSet']['Rows'][1]['Data'][0]
-
+    """
     if result:
         count = result['VarCharValue']
         # build response string
@@ -115,9 +115,10 @@ def sequence_intent_handler(intent_request, session_attributes):
         else:
             response_string = 'Yes, there were {} {}'.format(count, SEQUENCE_DONE_PHRASE
 
+    logger.debug('<<BIBot>> "Count value is: %s' % count)        
+    """
+    response_string = query_string
 
-    #response_string = query_string
-    logger.debug('<<BIBot>> "Count value is: %s' % count)
 
 
 

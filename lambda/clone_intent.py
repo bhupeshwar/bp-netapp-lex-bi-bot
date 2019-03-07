@@ -111,7 +111,7 @@ def clone_intent_handler(intent_request, session_attributes):
 
     result = response['ResultSet']['Rows'][1]['Data'][0]
 
-
+    """
     if result:
         count = result['VarCharValue']
         # build response string
@@ -125,7 +125,7 @@ def clone_intent_handler(intent_request, session_attributes):
 
     response_string = query_string
 
-    """
+
 
     # add the English versions of the WHERE clauses
     for dimension in bibot.DIMENSIONS:
