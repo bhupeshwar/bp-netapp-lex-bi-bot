@@ -3,9 +3,9 @@
         "description": "Names of Clone in job_details database",
         "valueSelectionStrategy": "TOP_RESOLUTION",
         "enumerationValues": [
-          { "value": "EMEA" },
-          { "value": "BBSBR" },
-          { "value": "REVENUE" },
-          { "value": "POST-US" }
+          { "value": "EMEA Clone" },
+          { "value": "BBSBR Clone" },
+          { "value": "REVENUE Clone" },
+          { "value": "POST-US Clone" }
 	 ]
 }

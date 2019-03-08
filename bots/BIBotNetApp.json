@@ -29,6 +29,14 @@
         {
             "intentVersion": "$LATEST",
             "intentName": "Goodbye_Intent"
+        },
+        {
+            "intentVersion": "$LATEST",
+	           "intentName": "Jobdone_Intent"
+        },
+        {
+            "intentVersion": "$LATEST",
+             "intentName": "Jobdonetime_Intent"
         }
   ],
   "locale": "en-US",
