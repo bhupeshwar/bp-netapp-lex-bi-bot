@@ -27,11 +27,11 @@ import bibot_userexits as userexits
 # SELECT statement for CLONE_JOB_DONE
 
 
-CLONE_JOB_DONE_SELECT = "SELECT date_format(DLD.end_time, '%H:%i %p') from BA_DL_DETAILS as DLD "
+CLONE_JOB_DONE_SELECT = "SELECT date_format(DLD.end_time, '%l:%i %p') from BA_DL_DETAILS as DLD "
 CLONE_JOB_DONE_JOIN = " WHERE BASELINE_ID in (24,213) "
 CLONE_JOB_DONE_DATE = " AND date_format({}, '%Y-%m-%d')  =  date_format(timestamp'{}', '%Y-%m-%d') "
 CLONE_JOB_DONE_WHERE = " AND {} = {} "
-CLONE_JOB_DONE_PHRASE = 'Clone job done'
+CLONE_JOB_DONE_PHRASE = 'Clone completed'
 
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
@@ -127,7 +127,7 @@ def clone_intent_handler(intent_request, session_attributes):
         if count == '0':
             response_string = 'There were no {}'.format(CLONE_JOB_DONE_PHRASE)
         else:
-            response_string = 'Job ran at {} {}'.format(count, CLONE_JOB_DONE_PHRASE)
+            response_string = '{} {}'.format(count, CLONE_JOB_DONE_PHRASE)
 
     logger.debug('<<BIBot>> "Count value is: %s' % count)
 
