@@ -85,11 +85,18 @@ def clone_intent_handler(intent_request, session_attributes):
     for dimension in bibot.DIMENSIONS:
         slot_key = bibot.DIMENSIONS.get(dimension).get('slot')
         if slot_values[slot_key] is not None:
-            if slot_key == 'clone_name':            
+            if slot_key == 'clone_name':
                 value = userexits.pre_process_query_value(slot_key, slot_values[slot_key])
 
-                if (value.upper() == 'REVENUE CLONE'):
+                if (value.upper() == 'EMEA CLONE' || value.upper() == 'EMEA'):
                     template_id_value = 10
+                if (value.upper() == 'BBSBR CLONE' || value.upper() == 'BBSBR'):
+                    template_id_value = 12
+                if (value.upper() == 'REVENUE CLONE' || value.upper() == 'REVENUE'):
+                    template_id_value = 13
+                if (value.upper() == 'POST-US CLONE' || value.upper() == 'POST-US'):
+                    template_id_value = 14
+
                 """
                 if (re.search("^EMEA.*CLONE$", value.upper())):
                     template_id_value = 10
