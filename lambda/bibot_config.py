@@ -25,7 +25,7 @@ SLOT_CONFIG = {
     'dl_date':      {'type': ORIGINAL_VALUE, 'remember': True},
     'sequence_name':     {'type': TOP_RESOLUTION, 'remember': True,  'error': 'I couldn\'t find an Sequence called "{}".'},
     'job_date':      {'type': ORIGINAL_VALUE, 'remember': True},
-    'clone_name':      {'type': ORIGINAL_VALUE, 'remember': True},
+    'clone_name':      {'type': TOP_RESOLUTION, 'remember': True,  'error': 'I couldn\'t find an Sequence called "{}".'},
     'template_name':         {'type': TOP_RESOLUTION, 'remember': True,  'error': 'I couldn\'t find a template called "{}".'},
     'count':            {'type': ORIGINAL_VALUE, 'remember': True},
     'dimension':        {'type': ORIGINAL_VALUE, 'remember': True}
