@@ -19,7 +19,7 @@
 import time
 import logging
 import json
-#import re
+import re
 import bibot_config as bibot
 import bibot_helpers as helpers
 import bibot_userexits as userexits
@@ -30,8 +30,8 @@ import bibot_userexits as userexits
 CLONE_JOB_DONE_SELECT = "SELECT date_format(DLD.end_time, '%Y-%m-%d %H:%i:%s') from BA_DL_DETAILS as DLD "
 CLONE_JOB_DONE_JOIN = " WHERE BASELINE_ID in (24,213) "
 CLONE_JOB_DONE_DATE = " AND date_format({}, '%Y-%m-%d')  =  date_format(timestamp'{}', '%Y-%m-%d') "
-CLONE_JOB_DONE_WHERE = " AND LOWER({}) = {} "
-CLONE_JOB_DONE_PHRASE = 'Clone done'
+CLONE_JOB_DONE_WHERE = " AND {} = {} "
+CLONE_JOB_DONE_PHRASE = 'Clone job done'
 
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
@@ -87,7 +87,7 @@ def clone_intent_handler(intent_request, session_attributes):
         if slot_values[slot_key] is not None:
             if slot_key == 'clone_name':
                 value = userexits.pre_process_query_value(slot_key, slot_values[slot_key])
-
+                """
                 if (value.upper() == 'EMEA CLONE' or value.upper() == 'EMEA'):
                     template_id_value = 10
                 if (value.upper() == 'BBSBR CLONE' or value.upper() == 'BBSBR'):
@@ -106,7 +106,7 @@ def clone_intent_handler(intent_request, session_attributes):
                     template_id_value = 13
                 if (re.search("^POST-US.*CLONE$", value.upper()) or re.search("^POST.*US.*CLONE$", value.upper())):
                     template_id_value = 14
-                """
+
                 where_clause += CLONE_JOB_DONE_WHERE.format(bibot.DIMENSIONS.get(dimension).get('column'),template_id_value)
         if slot_values[slot_key] is not None:
             if slot_key == 'job_date':
