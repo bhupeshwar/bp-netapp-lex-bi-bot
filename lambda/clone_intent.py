@@ -54,8 +54,8 @@ def lambda_handler(event, context):
 def clone_intent_handler(intent_request, session_attributes):
     method_start = time.perf_counter()
 
-    logger.debug('<<BIBot>> subjobdone_intent_handler: intent_request = ' + json.dumps(intent_request))
-    logger.debug('<<BIBot>> subjobdone_intent_handler: session_attributes = ' + json.dumps(session_attributes))
+    logger.debug('<<BIBot>> clone_intent_handler: intent_request = ' + json.dumps(intent_request))
+    logger.debug('<<BIBot>> clone_intent_handler: session_attributes = ' + json.dumps(session_attributes))
 
     session_attributes['greetingCount'] = '1'
     session_attributes['resetCount'] = '0'

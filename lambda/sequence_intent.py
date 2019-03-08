@@ -56,19 +56,19 @@ def lambda_handler(event, context):
         return helpers.close(session_attributes, 'Fulfilled',
             {'contentType': 'PlainText', 'content': config_error})
     else:
-        return sequence_intent_handler(event, session_attributes)
+        return clone_intent_handler(event, session_attributes)
 
 
-def sequence_intent_handler(intent_request, session_attributes):
+def clone_intent_handler(intent_request, session_attributes):
     method_start = time.perf_counter()
 
-    logger.debug('<<BIBot>> sequence_intent_handler: intent_request = ' + json.dumps(intent_request))
-    logger.debug('<<BIBot>> sequence_intent_handler: session_attributes = ' + json.dumps(session_attributes))
+    logger.debug('<<BIBot>> clone_intent_handler: intent_request = ' + json.dumps(intent_request))
+    logger.debug('<<BIBot>> clone_intent_handler: session_attributes = ' + json.dumps(session_attributes))
 
     session_attributes['greetingCount'] = '1'
     session_attributes['resetCount'] = '0'
     session_attributes['finishedCount'] = '0'
-    session_attributes['lastIntent'] = 'Sequence_Intent'
+    session_attributes['lastIntent'] = 'Clone_Intent'
 
     # Retrieve slot values from the current request
     slot_values = session_attributes.get('slot_values')
@@ -78,11 +78,11 @@ def sequence_intent_handler(intent_request, session_attributes):
     except bibot.SlotError as err:
         return helpers.close(session_attributes, 'Fulfilled', {'contentType': 'PlainText','content': str(err)})
 
-    logger.debug('<<BIBot>> "sequence_intent_handler(): slot_values: %s', slot_values)
+    logger.debug('<<BIBot>> "clone_intent_handler(): slot_values: %s', slot_values)
 
     # Retrieve "remembered" slot values from session attributes
     slot_values = helpers.get_remembered_slot_values(slot_values, session_attributes)
-    logger.debug('<<BIBot>> "sequence_intent_handler(): slot_values afer get_remembered_slot_values: %s', slot_values)
+    logger.debug('<<BIBot>> "clone_intent_handler(): slot_values afer get_remembered_slot_values: %s', slot_values)
 
     # Remember updated slot values
     helpers.remember_slot_values(slot_values, session_attributes)
