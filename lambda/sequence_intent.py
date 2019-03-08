@@ -56,7 +56,7 @@ def lambda_handler(event, context):
         return helpers.close(session_attributes, 'Fulfilled',
             {'contentType': 'PlainText', 'content': config_error})
     else:
-        return subjobdone_intent_handler(event, session_attributes)
+        return sequence_intent_handler(event, session_attributes)
 
 
 def sequence_intent_handler(intent_request, session_attributes):
