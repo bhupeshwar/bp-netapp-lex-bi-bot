@@ -88,23 +88,23 @@ def clone_intent_handler(intent_request, session_attributes):
             if slot_key == 'clone_name':
                 value = userexits.pre_process_query_value(slot_key, slot_values[slot_key])
 
-                if (value.upper() == 'EMEA CLONE' || value.upper() == 'EMEA'):
+                if (value.upper() == 'EMEA CLONE' or value.upper() == 'EMEA'):
                     template_id_value = 10
-                if (value.upper() == 'BBSBR CLONE' || value.upper() == 'BBSBR'):
+                if (value.upper() == 'BBSBR CLONE' or value.upper() == 'BBSBR'):
                     template_id_value = 12
-                if (value.upper() == 'REVENUE CLONE' || value.upper() == 'REVENUE'):
+                if (value.upper() == 'REVENUE CLONE' or value.upper() == 'REVENUE'):
                     template_id_value = 13
-                if (value.upper() == 'POST-US CLONE' || value.upper() == 'POST-US'):
+                if (value.upper() == 'POST-US CLONE' or value.upper() == 'POST-US'):
                     template_id_value = 14
 
                 """
                 if (re.search("^EMEA.*CLONE$", value.upper())):
                     template_id_value = 10
-                if (re.search("^BBSBR.*CLONE$", value.upper()) || re.search("^BOOKING.*CLONE$", value.upper()) || re.search("^BOOKING.*", value.upper())):
+                if (re.search("^BBSBR.*CLONE$", value.upper()) or re.search("^BOOKING.*CLONE$", value.upper()) or re.search("^BOOKING.*", value.upper())):
                     template_id_value = 12
                 if (re.search("^REVENUE.*CLONE$", value.upper())):
                     template_id_value = 13
-                if (re.search("^POST-US.*CLONE$", value.upper()) || re.search("^POST.*US.*CLONE$", value.upper())):
+                if (re.search("^POST-US.*CLONE$", value.upper()) or re.search("^POST.*US.*CLONE$", value.upper())):
                     template_id_value = 14
                 """
                 where_clause += CLONE_JOB_DONE_WHERE.format(bibot.DIMENSIONS.get(dimension).get('column'),template_id_value)
