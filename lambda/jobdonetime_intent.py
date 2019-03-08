@@ -85,7 +85,7 @@ def jobdone_intent_handler(intent_request, session_attributes):
         if slot_key == 'dl_date':
             if slot_values[slot_key] is not None:
                 value = userexits.pre_process_query_value(slot_key, slot_values[slot_key])
-                where_clause += JOB_DONE_DATE.format(bibot.DIMENSIONS.get(dimension).get('column'),value)
+                where_clause += JOB_DONE_DATE.format('DL.end_date',value)
         if slot_values[slot_key] is not None:
             if slot_key != 'dl_date':
                 value = userexits.pre_process_query_value(slot_key, slot_values[slot_key])
