@@ -85,37 +85,13 @@ def clone_intent_handler(intent_request, session_attributes):
     for dimension in bibot.DIMENSIONS:
         slot_key = bibot.DIMENSIONS.get(dimension).get('slot')
         if slot_values[slot_key] is not None:
-            if slot_key == 'clone_name':
-                value = userexits.pre_process_query_value(slot_key, slot_values[slot_key])
-                """
-                if (value.upper() == 'EMEA CLONE' or value.upper() == 'EMEA'):
-                    template_id_value = 10
-                if (value.upper() == 'BBSBR CLONE' or value.upper() == 'BBSBR'):
-                    template_id_value = 12
-                if (value.upper() == 'REVENUE CLONE' or value.upper() == 'REVENUE'):
-                    template_id_value = 13
-                if (value.upper() == 'POST-US CLONE' or value.upper() == 'POST-US'):
-                    template_id_value = 14
+            value = userexits.pre_process_query_value(slot_key, slot_values[slot_key])
+            where_clause += CLONE_JOB_DONE_WHERE.format(bibot.DIMENSIONS.get(dimension).get('column'),value)
 
-                """
-                if (re.search("^EMEA.*CLONE$", value.upper())):
-                    template_id_value = 10
-                if (re.search("^BBSBR.*CLONE$", value.upper()) or re.search("^BOOKING.*CLONE$", value.upper()) or re.search("^BOOKING.*", value.upper())):
-                    template_id_value = 12
-                if (re.search("^REVENUE.*CLONE$", value.upper())):
-                    template_id_value = 13
-                if (re.search("^POST-US.*CLONE$", value.upper()) or re.search("^POST.*US.*CLONE$", value.upper())):
-                    template_id_value = 14
-
-                where_clause += CLONE_JOB_DONE_WHERE.format(bibot.DIMENSIONS.get(dimension).get('column'),template_id_value)
-        if slot_values[slot_key] is not None:
-            if slot_key == 'job_date':
-                value = userexits.pre_process_query_value(slot_key, slot_values[slot_key])
-                where_clause += CLONE_JOB_DONE_DATE.format(bibot.DIMENSIONS.get(dimension).get('column'), value)
 
     query_string = select_clause + where_clause
 
-
+    """
     response = helpers.execute_athena_query(query_string)
 
     result = response['ResultSet']['Rows'][1]['Data'][0]
@@ -134,7 +110,7 @@ def clone_intent_handler(intent_request, session_attributes):
     """
 
     response_string = query_string
-    """
+
 
 
     # add the English versions of the WHERE clauses
