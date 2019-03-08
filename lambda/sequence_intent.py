@@ -39,7 +39,7 @@ SEQUENCE_DONE_JOIN = " JOIN ba_dl_baseline dlb on dmd.BASELINE_ID = dlb.BASELINE
 SEQUENCE_DONE_DATE = " AND date_format({}, '%Y-%m-%d')  =  date_format(timestamp'{}', '%Y-%m-%d') "
 SEQUENCE_DONE_WHERE = " AND LOWER({}) LIKE LOWER('%{}%') "
 SEQUENCE_DONE_GROUPBY = " GROUP BY dld.end_time , dlb.OBJECT_NAME "
-SEQUENCE_DONE_PHRASE = "Sequence done"
+SEQUENCE_DONE_PHRASE = 'Sequence done'
 
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
