@@ -1,12 +1,11 @@
 {
         "name": "clone_name",
-        "description": "Names of clone in job_details database",
+        "description": "Names of Clone in job_details database",
         "valueSelectionStrategy": "TOP_RESOLUTION",
         "enumerationValues": [
-          { "value": "US Post Revenue Load" },
-          { "value": "US Post Revenue" },
-          { "value": "US Revenue" },
-          { "value": "EMEA" },
-          { "value": "BBSBR" }
+          { "value": "EMEA Clone" },
+          { "value": "BBSBR Clone" },
+          { "value": "REVENUE Clone" },
+          { "value": "POST-US Clone" }
 	 ]
 }
