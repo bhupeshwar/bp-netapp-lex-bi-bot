@@ -84,8 +84,8 @@ def clone_intent_handler(intent_request, session_attributes):
     where_clause = CLONE_JOB_DONE_JOIN
     for dimension in bibot.DIMENSIONS:
         slot_key = bibot.DIMENSIONS.get(dimension).get('slot')
-        if slot_key == 'clone_name':
-            if slot_values[slot_key] is not None:
+        if slot_values[slot_key] is not None:
+            if slot_key == 'clone_name':            
                 value = userexits.pre_process_query_value(slot_key, slot_values[slot_key])
 
                 if (value.upper() == 'REVENUE CLONE'):
