@@ -92,12 +92,12 @@ def sequence_intent_handler(intent_request, session_attributes):
     where_clause = SEQUENCE_DONE_JOIN
     for dimension in bibot.DIMENSIONS:
         slot_key = bibot.DIMENSIONS.get(dimension).get('slot')
-        if slot_key == 'job_date':
-            if slot_values[slot_key] is not None:
+        if slot_values[slot_key] is not None:
+            if slot_key == 'job_date':
                 value = userexits.pre_process_query_value(slot_key, slot_values[slot_key])
-                where_clause += SEQUENCE_DONE_DATE.format('dld.end_time', value)
-        if slot_key == 'sequence_name':
-            if slot_values[slot_key] is not None:
+                where_clause += SEQUENCE_DONE_DATE.format(bibot.DIMENSIONS.get(dimension).get('column'), value)
+        if slot_values[slot_key] is not None:
+            if slot_key == 'sequence_name':
                 value = userexits.pre_process_query_value(slot_key, slot_values[slot_key])
                 where_clause += SEQUENCE_DONE_WHERE.format(bibot.DIMENSIONS.get(dimension).get('column'), value)
 
