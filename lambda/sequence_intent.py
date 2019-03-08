@@ -19,28 +19,20 @@
 import time
 import logging
 import json
+import re
 import bibot_config as bibot
 import bibot_helpers as helpers
 import bibot_userexits as userexits
 
-# SELECT statement for SEQUENCE_DONE
+# SELECT statement for CLONE_JOB_DONE
 
-SEQUENCE_DONE_SELECT = "SELECT count(dmd.sequence_name)  FROM ba_dashboard_master_details dmd , ba_dl dl"
-SEQUENCE_DONE_JOIN = " WHERE DL.status != 'W' "
-SEQUENCE_DONE_DATE = " AND date_format({}, '%Y-%m-%d')  =  date_format(timestamp'{}', '%Y-%m-%d') "
-SEQUENCE_DONE_WHERE = " AND LOWER({}) LIKE LOWER('%{}%') "
-SEQUENCE_DONE_GROUPBY = " GROUP BY dl.end_date , dmd.sequence_name "
-SEQUENCE_DONE_PHRASE = "Sequence done"
 
-"""
+CLONE_JOB_DONE_SELECT = "SELECT date_format(DLD.end_time, '%l:%i %p') from BA_DL_DETAILS as DLD "
+CLONE_JOB_DONE_JOIN = " WHERE BASELINE_ID in (24,213) "
+CLONE_JOB_DONE_DATE = " AND date_format({}, '%Y-%m-%d')  =  date_format(timestamp'{}', '%Y-%m-%d') "
+CLONE_JOB_DONE_WHERE = " AND {} = {} "
+CLONE_JOB_DONE_PHRASE = 'Clone completed'
 
-SEQUENCE_DONE_SELECT = "SELECT count(dlb.OBJECT_NAME)  FROM ba_dashboard_master_details dmd "
-SEQUENCE_DONE_JOIN = " JOIN ba_dl_baseline dlb on dmd.BASELINE_ID = dlb.BASELINE_ID JOIN ba_dl_details dld on  dld.BASELINE_ID = dlb.BASELINE_ID WHERE DL.status != 'W' "
-SEQUENCE_DONE_DATE = " AND date_format({}, '%Y-%m-%d')  =  date_format(timestamp'{}', '%Y-%m-%d') "
-SEQUENCE_DONE_WHERE = " AND LOWER({}) LIKE LOWER('%{}%') "
-SEQUENCE_DONE_GROUPBY = " GROUP BY dld.end_time , dlb.object_name "
-SEQUENCE_DONE_PHRASE = 'Sequence done'
-"""
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 
@@ -88,38 +80,61 @@ def clone_intent_handler(intent_request, session_attributes):
     helpers.remember_slot_values(slot_values, session_attributes)
 
     # build and execute query
-    select_clause = SEQUENCE_DONE_SELECT
-    where_clause = SEQUENCE_DONE_JOIN
+    select_clause = CLONE_JOB_DONE_SELECT
+    where_clause = CLONE_JOB_DONE_JOIN
     for dimension in bibot.DIMENSIONS:
         slot_key = bibot.DIMENSIONS.get(dimension).get('slot')
         if slot_values[slot_key] is not None:
+            if slot_key == 'clone_name':
+                value = userexits.pre_process_query_value(slot_key, slot_values[slot_key])
+                """
+                if (value.upper() == 'EMEA CLONE' or value.upper() == 'EMEA'):
+                    template_id_value = 10
+                if (value.upper() == 'BBSBR CLONE' or value.upper() == 'BBSBR'):
+                    template_id_value = 12
+                if (value.upper() == 'REVENUE CLONE' or value.upper() == 'REVENUE'):
+                    template_id_value = 13
+                if (value.upper() == 'POST-US CLONE' or value.upper() == 'POST-US'):
+                    template_id_value = 14
+
+                """
+                if (re.search("^EMEA.*CLONE$", value.upper())):
+                    template_id_value = 10
+                if (re.search("^BBSBR.*CLONE$", value.upper()) or re.search("^BOOKING.*CLONE$", value.upper()) or re.search("^BOOKING.*", value.upper())):
+                    template_id_value = 12
+                if (re.search("^REVENUE.*CLONE$", value.upper())):
+                    template_id_value = 13
+                if (re.search("^POST-US.*CLONE$", value.upper()) or re.search("^POST.*US.*CLONE$", value.upper())):
+                    template_id_value = 14
+
+                where_clause += CLONE_JOB_DONE_WHERE.format(bibot.DIMENSIONS.get(dimension).get('column'),template_id_value)
+        if slot_values[slot_key] is not None:
             if slot_key == 'job_date':
                 value = userexits.pre_process_query_value(slot_key, slot_values[slot_key])
-                where_clause += SEQUENCE_DONE_DATE.format('dld.end_time', value)
-        if slot_values[slot_key] is not None:
-            if slot_key == 'sequence_name':
-                value = userexits.pre_process_query_value(slot_key, slot_values[slot_key])
-                where_clause += SEQUENCE_DONE_WHERE.format(bibot.DIMENSIONS.get(dimension).get('column'), value)
+                where_clause += CLONE_JOB_DONE_DATE.format(bibot.DIMENSIONS.get(dimension).get('column'), value)
 
-    query_string = select_clause + where_clause + SEQUENCE_DONE_GROUPBY
-    """
+    query_string = select_clause + where_clause
+
+
     response = helpers.execute_athena_query(query_string)
 
     result = response['ResultSet']['Rows'][1]['Data'][0]
+
 
     if result:
         count = result['VarCharValue']
         # build response string
         if count == '0':
-            response_string = 'There were no {}'.format(SEQUENCE_DONE_PHRASE)
+            response_string = 'There were no {}'.format(CLONE_JOB_DONE_PHRASE)
         else:
-            response_string = 'Yes, there were {} {}'.format(count, SEQUENCE_DONE_PHRASE
+            response_string = '{} {}'.format(count, CLONE_JOB_DONE_PHRASE)
 
     logger.debug('<<BIBot>> "Count value is: %s' % count)
+
     """
+
     response_string = query_string
-
-
+    """
 
 
     # add the English versions of the WHERE clauses
