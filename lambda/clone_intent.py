@@ -27,7 +27,7 @@ import bibot_userexits as userexits
 # SELECT statement for CLONE_JOB_DONE
 
 
-CLONE_JOB_DONE_SELECT = "SELECT date_format(DLD.end_time, '%Y-%m-%d %H:%i:%s') from BA_DL_DETAILS as DLD "
+CLONE_JOB_DONE_SELECT = "SELECT date_format(DLD.end_time, '%H:%i') from BA_DL_DETAILS as DLD "
 CLONE_JOB_DONE_JOIN = " WHERE BASELINE_ID in (24,213) "
 CLONE_JOB_DONE_DATE = " AND date_format({}, '%Y-%m-%d')  =  date_format(timestamp'{}', '%Y-%m-%d') "
 CLONE_JOB_DONE_WHERE = " AND {} = {} "
