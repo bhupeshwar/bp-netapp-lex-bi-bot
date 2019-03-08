@@ -115,7 +115,7 @@ def clone_intent_handler(intent_request, session_attributes):
 
     query_string = select_clause + where_clause
 
-    """
+
     response = helpers.execute_athena_query(query_string)
 
     result = response['ResultSet']['Rows'][1]['Data'][0]
@@ -130,10 +130,11 @@ def clone_intent_handler(intent_request, session_attributes):
             response_string = 'Yes, there were {} {}'.format(count, CLONE_JOB_DONE_PHRASE)
 
     logger.debug('<<BIBot>> "Count value is: %s' % count)
+
     """
 
     response_string = query_string
-
+    """
 
 
     # add the English versions of the WHERE clauses
