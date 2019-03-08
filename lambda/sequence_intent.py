@@ -24,7 +24,7 @@ import bibot_helpers as helpers
 import bibot_userexits as userexits
 
 # SELECT statement for SEQUENCE_DONE
-"""
+
 SEQUENCE_DONE_SELECT = "SELECT count(dmd.sequence_name)  FROM ba_dashboard_master_details dmd , ba_dl dl"
 SEQUENCE_DONE_JOIN = " WHERE DL.status != 'W' "
 SEQUENCE_DONE_DATE = " AND date_format({}, '%Y-%m-%d')  =  date_format(timestamp'{}', '%Y-%m-%d') "
@@ -38,9 +38,9 @@ SEQUENCE_DONE_SELECT = "SELECT count(dlb.OBJECT_NAME)  FROM ba_dashboard_master_
 SEQUENCE_DONE_JOIN = " JOIN ba_dl_baseline dlb on dmd.BASELINE_ID = dlb.BASELINE_ID JOIN ba_dl_details dld on  dld.BASELINE_ID = dlb.BASELINE_ID WHERE DL.status != 'W' "
 SEQUENCE_DONE_DATE = " AND date_format({}, '%Y-%m-%d')  =  date_format(timestamp'{}', '%Y-%m-%d') "
 SEQUENCE_DONE_WHERE = " AND LOWER({}) LIKE LOWER('%{}%') "
-SEQUENCE_DONE_GROUPBY = " GROUP BY dld.end_time , dlb.OBJECT_NAME "
+SEQUENCE_DONE_GROUPBY = " GROUP BY dld.end_time , dlb.object_name "
 SEQUENCE_DONE_PHRASE = 'Sequence done'
-
+"""
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 
