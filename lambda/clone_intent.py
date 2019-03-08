@@ -19,7 +19,7 @@
 import time
 import logging
 import json
-#import re
+import re
 import bibot_config as bibot
 import bibot_helpers as helpers
 import bibot_userexits as userexits
