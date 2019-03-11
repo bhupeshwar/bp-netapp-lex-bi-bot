@@ -33,7 +33,7 @@ SLOT_CONFIG = {
 
 DIMENSIONS = {
     'dl_name':     {'slot': 'dl_name',  'column': 'dl.dl_name',  'singular': 'dl_name'},
-    'month':     {'slot': 'dl_date', 'column': 'd.month',       'singular': 'month'},
+    'month':     {'slot': 'month', 'column': 'd.month',       'singular': 'month'},
     'dl_date':     {'slot': 'dl_date', 'column': 'dl.end_date',       'singular': 'dl_date'},
     'sequence_name':     {'slot': 'sequence_name', 'column': 'dlb.object_name',       'singular': 'sequence_name'},
     'job_date':     {'slot': 'job_date', 'column': 'dld.end_time',       'singular': 'job_date'},
