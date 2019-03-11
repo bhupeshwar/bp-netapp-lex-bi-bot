@@ -25,7 +25,7 @@ import bibot_userexits as userexits
 
 # SELECT statement for JOB_DONE query
 
-"""
+
 JOB_DONE_SELECT = "SELECT count(DL.dl_name) from BA_DL as DL"
 JOB_DONE_JOIN = " WHERE DL.status != 'W' "
 JOB_DONE_DATE = " AND date_format({}, '%Y-%m-%d')  =  date_format(timestamp'{}', '%Y-%m-%d') "
@@ -34,14 +34,11 @@ JOB_DONE_PHRASE = 'job done'
 """
 
 JOB_DONE_SELECT = "SELECT count(dlb.OBJECT_NAME) from FROM ba_dashboard_master_details dmd "
-JOB_DONE_JOIN = "JOIN ba_dl_baseline dlb on dmd.BASELINE_ID = dlb.BASELINE_ID JOIN ba_dl_details dld on  dld.BASELINE_ID = dlb.BASELINE_ID WHERE 1=1 "
-#JOB_DONE_JOIN = JOB_DONE_JOIN +="  WHERE 1=1 "
+JOB_DONE_JOIN = " JOIN ba_dl_baseline dlb on dmd.BASELINE_ID = dlb.BASELINE_ID JOIN ba_dl_details dld on  dld.BASELINE_ID = dlb.BASELINE_ID WHERE 1=1 "
 JOB_DONE_DATE = " AND date_format({}, '%Y-%m-%d')  =  date_format(timestamp'{}', '%Y-%m-%d')  "
 JOB_DONE_WHERE = " AND ( LOWER({}) LIKE LOWER('%{}%') or LOWER(dlb.OBJECT_NAME) LIKE LOWER('%{}%') or LOWER(dmd.TEMPLATE_NAME) LIKE LOWER('%{}%') ) "
-#JOB_DONE_OR = " or "
-JOB_DONE_GROUPBY = " GROUP BY dld.end_time , dlb.OBJECT_NAME "
 JOB_DONE_PHRASE = 'job done'
-
+"""
 
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
@@ -103,7 +100,7 @@ def jobdone_intent_handler(intent_request, session_attributes):
                 value = userexits.pre_process_query_value(slot_key, slot_values[slot_key])
                 where_clause += JOB_DONE_WHERE.format(bibot.DIMENSIONS.get(dimension).get('column'), value)
 
-    query_string = select_clause + where_clause + JOB_DONE_GROUPBY
+    query_string = select_clause + where_clause
     """
     response = helpers.execute_athena_query(query_string)
 
