@@ -106,7 +106,8 @@ def jobdone_intent_handler(intent_request, session_attributes):
     logger.debug('<<BIBot>> "Count value is: %s' % count)
 
     """
-    response = query_string
+    response_string = query_string
+    
     # add the English versions of the WHERE clauses
     for dimension in bibot.DIMENSIONS:
         slot_key = bibot.DIMENSIONS[dimension].get('slot')
