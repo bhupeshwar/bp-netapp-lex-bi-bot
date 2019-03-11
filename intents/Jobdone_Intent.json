@@ -17,14 +17,14 @@
           "type": "CodeHook"
         },
         "sampleUtterances": [
-          "Is {dl_name} jobs completed on {dl_date}",
-					"Is {dl_name} jobs has been completed {dl_date}",
-					"Was {dl_name} jobs ran on {dl_date}"
+          "Is {sequence_name} jobs completed on {job_date}",
+					"Is {sequence_name} jobs has been completed {job_date}",
+					"Was {sequence_name} jobs ran on {job_date}"
           ],
     "slots": [
 			{
-					"slotType": "dl_name",
-					"name": "dl_name",
+					"slotType": "sequence_name",
+					"name": "sequence_name",
 					"slotConstraint": "Optional",
 					"valueElicitationPrompt": {
 							"maxAttempts": 2,
@@ -38,11 +38,11 @@
 					"priority": 1,
 					"slotTypeVersion": "$LATEST",
 					"sampleUtterances": [],
-					"description": "dl_name"
+					"description": "sequence_name"
 			},
         {
             "slotType": "AMAZON.DATE",
-            "name": "dl_date",
+            "name": "job_date",
             "slotConstraint": "Optional",
             "valueElicitationPrompt": {
                 "maxAttempts": 2,
@@ -55,7 +55,7 @@
             },
             "priority": 2,
             "sampleUtterances": [],
-            "description": "dl_date"
+            "description": "job_date"
         }
     ]
 }

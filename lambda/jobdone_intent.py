@@ -33,10 +33,11 @@ JOB_DONE_WHERE = " AND LOWER({}) LIKE LOWER('%{}%') "
 JOB_DONE_PHRASE = 'job done'
 """
 
-JOB_DONE_SELECT = "SELECT count(dlb.OBJECT_NAME) from FROM ba_dashboard_master_details dmd "
+JOB_DONE_SELECT = "SELECT count(dlb.OBJECT_NAME) FROM ba_dashboard_master_details dmd "
 JOB_DONE_JOIN = " JOIN ba_dl_baseline dlb on dmd.BASELINE_ID = dlb.BASELINE_ID JOIN ba_dl_details dld on  dld.BASELINE_ID = dlb.BASELINE_ID WHERE 1=1 "
 JOB_DONE_DATE = " AND date_format({}, '%Y-%m-%d')  =  date_format(timestamp'{}', '%Y-%m-%d')  "
 JOB_DONE_WHERE = " AND ( LOWER({0}) LIKE LOWER('%{1}%') or LOWER(dlb.OBJECT_NAME) LIKE LOWER('%{1}%') or LOWER(dmd.TEMPLATE_NAME) LIKE LOWER('%{1}%') ) "
+JOB_DONE_GROUPBY = " GROUP BY dld.end_time , dmd.sequence_name , dlb.OBJECT_NAME ,dmd.TEMPLATE_NAME "
 JOB_DONE_PHRASE = 'job done'
 
 
@@ -91,16 +92,16 @@ def jobdone_intent_handler(intent_request, session_attributes):
     where_clause = JOB_DONE_JOIN
     for dimension in bibot.DIMENSIONS:
         slot_key = bibot.DIMENSIONS.get(dimension).get('slot')
-        if slot_key == 'dl_date':
+        if slot_key == 'job_date':
             if slot_values[slot_key] is not None:
                 value = userexits.pre_process_query_value(slot_key, slot_values[slot_key])
-                where_clause += JOB_DONE_DATE.format('DL.end_date',value)
+                where_clause += JOB_DONE_DATE.format(bibot.DIMENSIONS.get(dimension).get('column'),value)
         if slot_values[slot_key] is not None:
             if slot_key != 'dl_date':
                 value = userexits.pre_process_query_value(slot_key, slot_values[slot_key])
                 where_clause += JOB_DONE_WHERE.format(bibot.DIMENSIONS.get(dimension).get('column'), value)
 
-    query_string = select_clause + where_clause
+    query_string = select_clause + where_clause + JOB_DONE_GROUPBY
     """
     response = helpers.execute_athena_query(query_string)
 
