@@ -24,13 +24,10 @@ import bibot_helpers as helpers
 import bibot_userexits as userexits
 
 # SELECT statement for JOB_DONE query
-JOB_DONE_SELECT = "SELECT count(dlb.OBJECT_NAME) from FROM ba_dashboard_master_details dmd "
-JOB_DONE_JOIN = "JOIN ba_dl_baseline dlb on dmd.BASELINE_ID = dlb.BASELINE_ID JOIN ba_dl_details dld on  dld.BASELINE_ID = dlb.BASELINE_ID"
-JOB_DONE_JOIN = JOB_DONE_JOIN +="  WHERE 1=1 "
-JOB_DONE_DATE = " AND date_format({}, '%Y-%m-%d')  =  date_format(timestamp'{}', '%Y-%m-%d')  AND ("
-JOB_DONE_WHERE = " LOWER({}) LIKE LOWER('%{}%') "
-JOB_DONE_OR = " or "
-JOB_DONE_GROUPBY = " GROUP BY dld.end_time , dlb.OBJECT_NAME "
+JOB_DONE_SELECT = "SELECT count(DL.dl_name) from BA_DL as DL"
+JOB_DONE_JOIN = " WHERE DL.status != 'W' "
+JOB_DONE_DATE = " AND date_format({}, '%Y-%m-%d')  =  date_format(timestamp'{}', '%Y-%m-%d') "
+JOB_DONE_WHERE = " AND LOWER({}) LIKE LOWER('%{}%') "
 JOB_DONE_PHRASE = 'job done'
 
 logger = logging.getLogger()
@@ -89,19 +86,12 @@ def jobdone_intent_handler(intent_request, session_attributes):
                 value = userexits.pre_process_query_value(slot_key, slot_values[slot_key])
                 where_clause += JOB_DONE_DATE.format('DL.end_date',value)
         if slot_values[slot_key] is not None:
-            if slot_key == 'dl_name':
+            if slot_key != 'dl_date':
                 value = userexits.pre_process_query_value(slot_key, slot_values[slot_key])
                 where_clause += JOB_DONE_WHERE.format(bibot.DIMENSIONS.get(dimension).get('column'), value)
-                where_clause += JOB_DONE_OR
-        if slot_values[slot_key] is not None:
-            if slot_key == 'sequence_name':
-                value = userexits.pre_process_query_value(slot_key, slot_values[slot_key])
-                where_clause += JOB_DONE_WHERE.format(bibot.DIMENSIONS.get(dimension).get('column'), value)
-                where_clause += " ) "
 
-    query_string = select_clause + where_clause + JOB_DONE_GROUPBY
+    query_string = select_clause + where_clause
 
-    """
     response = helpers.execute_athena_query(query_string)
 
     result = response['ResultSet']['Rows'][1]['Data'][0]
@@ -115,8 +105,7 @@ def jobdone_intent_handler(intent_request, session_attributes):
 
     logger.debug('<<BIBot>> "Count value is: %s' % count)
 
-    """
-    response_string = query_string
+
 
     # add the English versions of the WHERE clauses
     for dimension in bibot.DIMENSIONS:
