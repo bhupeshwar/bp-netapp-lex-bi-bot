@@ -34,8 +34,8 @@ JOB_DONE_PHRASE = 'job done'
 """
 
 JOB_DONE_SELECT = "SELECT count(dlb.OBJECT_NAME) from FROM ba_dashboard_master_details dmd "
-JOB_DONE_JOIN = "JOIN ba_dl_baseline dlb on dmd.BASELINE_ID = dlb.BASELINE_ID JOIN ba_dl_details dld on  dld.BASELINE_ID = dlb.BASELINE_ID"
-JOB_DONE_JOIN = JOB_DONE_JOIN +="  WHERE 1=1 "
+JOB_DONE_JOIN = "JOIN ba_dl_baseline dlb on dmd.BASELINE_ID = dlb.BASELINE_ID JOIN ba_dl_details dld on  dld.BASELINE_ID = dlb.BASELINE_ID WHERE 1=1 "
+#JOB_DONE_JOIN = JOB_DONE_JOIN +="  WHERE 1=1 "
 JOB_DONE_DATE = " AND date_format({}, '%Y-%m-%d')  =  date_format(timestamp'{}', '%Y-%m-%d')  "
 JOB_DONE_WHERE = " AND ( LOWER({}) LIKE LOWER('%{}%') or LOWER(dlb.OBJECT_NAME) LIKE LOWER('%{}%') or LOWER(dmd.TEMPLATE_NAME) LIKE LOWER('%{}%') "
 #JOB_DONE_OR = " or "
