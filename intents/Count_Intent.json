@@ -17,7 +17,7 @@
           "type": "CodeHook"
         },
         "sampleUtterances": [
-          "Total {dl_name} jobs ran in {event_month}",
+          "Total {dl_name} jobs ran in {dl_date}",
           "How many jobs were ran for {dl_name}"
         ],
     "slots": [
@@ -39,22 +39,22 @@
             "sampleUtterances": [],
             "description": "dl_name"
         },
-        {
-            "slotType": "AMAZON.Month",
-            "name": "event_month",
+				{
+					"slotType": "AMAZON.DATE",
+					"name": "dl_date",
             "slotConstraint": "Optional",
             "valueElicitationPrompt": {
                 "maxAttempts": 2,
                 "messages": [
                     {
-                        "content": "The month of the event",
+                        "content": "The completion date  of the Job",
                         "contentType": "PlainText"
                     }
                 ]
             },
             "priority": 2,
             "sampleUtterances": [],
-            "description": "event_month"
+            "description": "dl_date"
         }
     ]
 }

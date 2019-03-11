@@ -21,7 +21,6 @@ TOP_RESOLUTION = 1
 
 SLOT_CONFIG = {
     'dl_name':       {'type': TOP_RESOLUTION, 'remember': True,  'error': 'I couldn\'t find an DL called "{}".'},
-    'month':      {'type': ORIGINAL_VALUE, 'remember': True},
     'dl_date':      {'type': ORIGINAL_VALUE, 'remember': True},
     'sequence_name':     {'type': TOP_RESOLUTION, 'remember': True,  'error': 'I couldn\'t find an Sequence called "{}".'},
     'job_date':      {'type': ORIGINAL_VALUE, 'remember': True},
@@ -33,7 +32,6 @@ SLOT_CONFIG = {
 
 DIMENSIONS = {
     'dl_name':     {'slot': 'dl_name',  'column': 'dl.dl_name',  'singular': 'dl_name'},
-    'month':     {'slot': 'month', 'column': 'd.month',       'singular': 'month'},
     'dl_date':     {'slot': 'dl_date', 'column': 'dl.end_date',       'singular': 'dl_date'},
     'sequence_name':     {'slot': 'sequence_name', 'column': 'dlb.object_name',       'singular': 'sequence_name'},
     'job_date':     {'slot': 'job_date', 'column': 'dld.end_time',       'singular': 'job_date'},
