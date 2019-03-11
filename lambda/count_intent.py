@@ -26,7 +26,7 @@ import bibot_userexits as userexits
 # SELECT statement for Count query
 COUNT_SELECT = "SELECT count(dl.dl_name) from ba_dl as dl "
 COUNT_JOIN = " WHERE 1=1 "
-#COUNT__DATE = " AND date_format({}, '%Y-%m')  =  date_format(timestamp'{}', '%Y-%m')  "
+COUNT_DATE = " AND date_format({}, '%Y-%m')  =  date_format(timestamp'{}', '%Y-%m')  "
 COUNT_WHERE = " AND LOWER({}) LIKE LOWER('%{}%') "
 COUNT_PHRASE = 'job ran'
 
@@ -84,11 +84,11 @@ def count_intent_handler(intent_request, session_attributes):
         if slot_key == 'dl_date':
             if slot_values[slot_key] is not None:
                 value = userexits.pre_process_query_value(slot_key, slot_values[slot_key])
-                where_clause += JOB_DONE_DATE.format(bibot.DIMENSIONS.get(dimension).get('column'),value)
+                where_clause += COUNT_DATE.format(bibot.DIMENSIONS.get(dimension).get('column'),value)
         if slot_key != 'dl_date':
             if slot_values[slot_key] is not None:
                 value = userexits.pre_process_query_value(slot_key, slot_values[slot_key])
-                where_clause += JOB_DONE_WHERE.format(bibot.DIMENSIONS.get(dimension).get('column'), value)
+                where_clause += COUNT_WHERE.format(bibot.DIMENSIONS.get(dimension).get('column'), value)
 
     query_string = select_clause + where_clause
 
