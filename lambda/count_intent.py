@@ -26,7 +26,7 @@ import bibot_userexits as userexits
 # SELECT statement for Count query
 COUNT_SELECT = "SELECT count(dl.dl_name) from ba_dl as dl "
 COUNT_JOIN = " WHERE 1=1 "
-COUNT_DATE = " AND date_format({}, '%Y-%m')  =  date_format(timestamp'{}', '%Y-%m')  "
+COUNT_DATE = " AND date_format({}, '%Y-%m')  =  date_format(timestamp'{}-01', '%Y-%m')  "
 COUNT_WHERE = " AND LOWER({}) LIKE LOWER('%{}%') "
 COUNT_PHRASE = 'job ran'
 
