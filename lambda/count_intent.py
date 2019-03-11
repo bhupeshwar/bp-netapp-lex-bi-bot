@@ -93,7 +93,7 @@ def count_intent_handler(intent_request, session_attributes):
     query_string = select_clause + where_clause
 
 
-    """
+
     response = helpers.execute_athena_query(query_string)
     result = response['ResultSet']['Rows'][1]['Data'][0]
     if result:
@@ -112,6 +112,7 @@ def count_intent_handler(intent_request, session_attributes):
 
     """
     response_string = query_string
+    """
     # add the English versions of the WHERE clauses
     for dimension in bibot.DIMENSIONS:
         slot_key = bibot.DIMENSIONS[dimension].get('slot')
