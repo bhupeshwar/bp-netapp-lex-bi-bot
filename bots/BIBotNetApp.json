@@ -12,10 +12,6 @@
         },
         {
             "intentVersion": "$LATEST",
-	           "intentName": "Sequence_Intent"
-        },
-        {
-            "intentVersion": "$LATEST",
 	           "intentName": "Clone_Intent"
         },
         {
