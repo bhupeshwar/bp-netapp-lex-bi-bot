@@ -20,10 +20,6 @@
         },
         {
             "intentVersion": "$LATEST",
-            "intentName": "Refresh_Intent"
-        },
-        {
-            "intentVersion": "$LATEST",
             "intentName": "Goodbye_Intent"
         },
         {
