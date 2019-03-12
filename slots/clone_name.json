@@ -9,17 +9,17 @@
                 "US Post Revenue Load",
                 "US-Post Revenue Load",
                 "Post US"
-            ], "value": "US Post Revenue Load" },
+            ], "value": "POST-US Clone" },
             {  "synonyms": [
                 "US Revenue",
                 "Revenue"
-            ], "value": "US Revenue" },
+            ], "value": "REVENUE Clone" },
           {  "synonyms": [
                 "EMEA"
-            ], "value": "EMEA" },
+            ], "value": "EMEA Clone" },
           {  "synonyms": [
                 "BOOKING",
                 "US BBSBR"
-            ], "value": "BBSBR" }
+            ], "value": "BBSBR Clone" }
 	       ]
 }

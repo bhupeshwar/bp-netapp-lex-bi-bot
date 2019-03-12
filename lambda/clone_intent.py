@@ -98,13 +98,13 @@ def clone_intent_handler(intent_request, session_attributes):
                     template_id_value = 14
 
                 """
-                if (re.search("^EMEA.*", value.upper())):
+                if (re.search("^EMEA.*CLONE$", value.upper())):
                     template_id_value = 10
-                if (re.search("^BBSBR.*", value.upper()) or re.search("^BOOKING.*", value.upper())):
+                if (re.search("^BBSBR.*CLONE$", value.upper()) or re.search("^BOOKING.*CLONE$", value.upper()) or re.search("^BOOKING.*", value.upper())):
                     template_id_value = 12
-                if (re.search("^REVENUE.*", value.upper()) or re.search("^US*Revenue.*", value.upper())): 
+                if (re.search("^REVENUE.*CLONE$", value.upper())):
                     template_id_value = 13
-                if (re.search("^POST-US.*", value.upper()) or re.search("^POST*US.*", value.upper()) or or re.search("^US*Post*", value.upper()) ):
+                if (re.search("^POST-US.*CLONE$", value.upper()) or re.search("^POST.*US.*CLONE$", value.upper())):
                     template_id_value = 14
 
                 where_clause += CLONE_JOB_DONE_WHERE.format(bibot.DIMENSIONS.get(dimension).get('column'),template_id_value)
