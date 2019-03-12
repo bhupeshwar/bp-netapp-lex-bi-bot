@@ -27,7 +27,7 @@ import bibot_userexits as userexits
 #
 # parameters for Refresh intent
 #
-REFRESH_QUERY = 'SELECT DISTINCT SEQUENCE_NAME from ba_dashboard_master_details ORDER BY template_name'
+REFRESH_QUERY = 'SELECT DISTINCT SEQUENCE_NAME from ba_dashboard_master_details ORDER BY SEQUENCE_NAME'
 REFRESH_SLOT = 'sequence_name'
 REFRESH_INTENT = 'Jobdone_Intent'
 REFRESH_BOT = 'BIBotNetApp'
