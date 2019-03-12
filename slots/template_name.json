@@ -3,11 +3,23 @@
         "description": "Names of template_name in job_details database",
         "valueSelectionStrategy": "TOP_RESOLUTION",
         "enumerationValues": [
-          { "value": "US Post Revenue Load" },
-          { "value": "US Post Revenue" },
-          { "value": "US Revenue" },
-          { "value": "EMEA" },
-          { "value": "BBSBR" },
-          { "value": "US BBSBR" }
-      ]
+          {   "synonyms": [
+                "US Post Revenue",
+                "US-Post Revenue",
+                "US Post Revenue Load",
+                "US-Post Revenue Load",
+                "Post US"
+            ], "value": "US Post Revenue Load" },
+            {  "synonyms": [
+                "US Revenue",
+                "Revenue"
+            ], "value": "US Revenue" },
+          {  "synonyms": [
+                "EMEA"
+            ], "value": "EMEA" },
+          {  "synonyms": [
+                "BOOKING",
+                "US BBSBR"
+            ], "value": "BBSBR" }
+	       ]
 }

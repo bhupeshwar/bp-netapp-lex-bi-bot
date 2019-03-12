@@ -18,7 +18,8 @@
 
 import time
 import logging
-
+from datetime import date as d
+from datetime import datetime as dt
 #
 # See additional configuration parameters at bottom
 #
@@ -63,12 +64,19 @@ def get_month_name(value):
     return month_name if month_name else value.title()
 
 
+def date_convert(value):
+    #if not isinstance(value, str): return value
+    formatted_date = dt.strptime(value, '%Y-%m-%d')
+    return formatted_date.strftime('%d %b %Y')
+
+
+
 DIMENSION_FORMATTERS = {
     'dl_name':  {'format': 'For {}',              'function': str.title},
     'sequence_name':  {'format': 'For {}',              'function': str.title},
     'clone_name':  {'format': 'For {}',              'function': str.title},
-    'job_date':  {'format': 'On {}',              'function': str.title},
-    'dl_date':  {'format': 'On- {}',              'function': str.title},
+    'job_date':  {'format': 'On {}',              'function': date_convert},
+    'dl_date':  {'format': 'On {}',              'function': date_convert},
     'event_month': {'format': 'In the month of {}',  'function': get_month_name},
     'template_name':    {'format': 'For {}',              'function': str.title}
 }
