@@ -17,13 +17,13 @@
           "type": "CodeHook"
         },
         "sampleUtterances": [
-          "Total {dl_name} jobs ran in {dl_date}",
-          "How many jobs were ran for {dl_name}"
+          "Total {job_name} jobs ran in {dl_date}",
+          "How many jobs were ran for {job_name}"
         ],
     "slots": [
         {
-            "slotType": "dl_name",
-            "name": "dl_name",
+            "slotType": "job_name",
+            "name": "job_name",
             "slotConstraint": "Optional",
             "valueElicitationPrompt": {
                 "maxAttempts": 2,
@@ -37,7 +37,7 @@
             "priority": 1,
             "slotTypeVersion": "$LATEST",
             "sampleUtterances": [],
-            "description": "dl_name"
+            "description": "job_name"
         },
 				{
 					"slotType": "AMAZON.DATE",

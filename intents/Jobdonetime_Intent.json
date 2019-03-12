@@ -17,18 +17,18 @@
           "type": "CodeHook"
         },
         "sampleUtterances": [
-          "When did a {dl_name} jobs complete on {dl_date}"
+          "When did a {job_name} jobs complete on {dl_date}"
           ],
     "slots": [
         {
-            "slotType": "dl_name",
-            "name": "dl_name",
+            "slotType": "job_name",
+            "name": "job_name",
             "slotConstraint": "Optional",
             "valueElicitationPrompt": {
                 "maxAttempts": 2,
                 "messages": [
                     {
-                        "content": "The The name of dl",
+                        "content": "The The name of dl/job_name",
                         "contentType": "PlainText"
                     }
                 ]
@@ -36,7 +36,7 @@
             "priority": 1,
             "slotTypeVersion": "$LATEST",
             "sampleUtterances": [],
-            "description": "dl_name"
+            "description": "job_name"
         },
 				{
 					"slotType": "AMAZON.DATE",
