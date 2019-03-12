@@ -93,19 +93,19 @@ def jobdone_intent_handler(intent_request, session_attributes):
     where_clause = JOB_DONE_JOIN
     for dimension in bibot.DIMENSIONS:
         slot_key = bibot.DIMENSIONS.get(dimension).get('slot')
-        if slot_key == 'job_date':
+        if slot_key == 'dl_date':
             if slot_values[slot_key] is not None:
                 value = userexits.pre_process_query_value(slot_key, slot_values[slot_key])
                 where_clause += JOB_DONE_DATE.format(bibot.DIMENSIONS.get(dimension).get('column'),value)
         if slot_values[slot_key] is not None:
-            if slot_key != 'job_date':
+            if slot_key != 'dl_date':
                 value = userexits.pre_process_query_value(slot_key, slot_values[slot_key])
                 where_clause += JOB_DONE_WHERE.format(bibot.DIMENSIONS.get(dimension).get('column'), value)
 
 
     query_string = select_clause + where_clause
 
-    """
+
 
     response = helpers.execute_athena_query(query_string)
     result = response['ResultSet']['Rows'][1]['Data'][0]
@@ -118,10 +118,10 @@ def jobdone_intent_handler(intent_request, session_attributes):
             response_string = 'Yes, there were {} {}'.format(count, JOB_DONE_PHRASE)
 
     logger.debug('<<BIBot>> "Count value is: %s' % count)
+
     """
-
     response_string = query_string
-
+    """
 
     # add the English versions of the WHERE clauses
     for dimension in bibot.DIMENSIONS:
