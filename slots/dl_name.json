@@ -1,6 +1,6 @@
 {
         "name": "dl_name",
-        "description": "Names of DL in job_details database",
+        "description": "Names of dl_name in job_details database",
         "valueSelectionStrategy": "TOP_RESOLUTION",
         "enumerationValues": [
           {   "synonyms": [
