@@ -24,6 +24,10 @@
         },
         {
             "intentVersion": "$LATEST",
+	           "intentName": "Refreshsequence_Intent"
+        },
+        {
+            "intentVersion": "$LATEST",
 	           "intentName": "Jobdone_Intent"
         },
         {
