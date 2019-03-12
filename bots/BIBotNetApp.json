@@ -32,6 +32,10 @@
         },
         {
             "intentVersion": "$LATEST",
+	           "intentName": "Jobdonetoday_Intent"
+        },
+        {
+            "intentVersion": "$LATEST",
              "intentName": "Jobdonetime_Intent"
         }
   ],

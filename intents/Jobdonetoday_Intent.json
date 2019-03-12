@@ -1,6 +1,6 @@
 {
-	"name": "Jobdone_Intent",
-        "description": "Jobdone_Intent Recursively query the dataset",
+	"name": "Jobdonetoday_Intent",
+        "description": "Jobdonetoday_Intent Recursively query the dataset",
         "conclusionStatement": {
           "messages": [
             {
@@ -17,12 +17,13 @@
           "type": "CodeHook"
         },
         "sampleUtterances": [
-         "Was {sequence_name} jobs ran on {job_date}"
+          "Is {job_name} jobs completed on {job_date}",
+					"Is {job_name} jobs has been completed {job_date}"
           ],
     "slots": [
 			{
-					"slotType": "template_name",
-					"name": "template_name",
+					"slotType": "job_name",
+					"name": "job_name",
 					"slotConstraint": "Optional",
 					"valueElicitationPrompt": {
 							"maxAttempts": 2,
@@ -36,26 +37,8 @@
 					"priority": 1,
 					"slotTypeVersion": "$LATEST",
 					"sampleUtterances": [],
-					"description": "template_name"
+					"description": "job_name"
 			},
-				{
-						"slotType": "sequence_name",
-						"name": "sequence_name",
-						"slotConstraint": "Optional",
-						"valueElicitationPrompt": {
-								"maxAttempts": 2,
-								"messages": [
-										{
-												"content": "The name of sequence/Object",
-												"contentType": "PlainText"
-										}
-								]
-						},
-						"priority": 1,
-						"slotTypeVersion": "$LATEST",
-						"sampleUtterances": [],
-						"description": "sequence_name"
-				},
         {
             "slotType": "AMAZON.DATE",
             "name": "job_date",
