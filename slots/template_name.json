@@ -3,10 +3,11 @@
         "description": "Names of template_name in job_details database",
         "valueSelectionStrategy": "TOP_RESOLUTION",
         "enumerationValues": [
-           { "value": "US Post Revenue Load" },
-           { "value": "US Revenue" },
-           { "value": "EMEA" },
-           { "value": "US BBSBR" },
-           { "value": "BBSBR" }
+          { "value": "US Post Revenue Load" },
+          { "value": "US Post Revenue" },
+          { "value": "US Revenue" },
+          { "value": "EMEA" },
+          { "value": "BBSBR" },
+          { "value": "US BBSBR" }
            ]
 }
