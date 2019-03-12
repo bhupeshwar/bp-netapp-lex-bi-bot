@@ -73,6 +73,7 @@ def date_convert(value):
 
 DIMENSION_FORMATTERS = {
     'dl_name':  {'format': 'For {}',              'function': str.title},
+    'job_name':  {'format': 'For {}',              'function': str.title},
     'sequence_name':  {'format': 'For {}',              'function': str.title},
     'clone_name':  {'format': 'For {}',              'function': str.title},
     'job_date':  {'format': 'On {}',              'function': date_convert},
