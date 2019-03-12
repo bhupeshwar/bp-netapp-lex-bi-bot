@@ -33,11 +33,11 @@ JOB_DONE_WHERE = " AND LOWER({}) LIKE LOWER('%{}%') "
 JOB_DONE_PHRASE = 'job done'
 """
 
-JOB_DONE_SELECT = "SELECT count(dlb.OBJECT_NAME) FROM ba_dashboard_master_details dmd "
+JOB_DONE_SELECT = "SELECT count({}) FROM ba_dashboard_master_details dmd "
 JOB_DONE_JOIN = " JOIN ba_dl_baseline dlb on dmd.BASELINE_ID = dlb.BASELINE_ID JOIN ba_dl_details dld on  dld.BASELINE_ID = dlb.BASELINE_ID WHERE 1=1 "
 JOB_DONE_DATE = " AND date_format({}, '%Y-%m-%d')  =  date_format(timestamp'{}', '%Y-%m-%d')  "
-JOB_DONE_WHERE = " AND ( LOWER({0}) LIKE LOWER('%{1}%') or LOWER(dlb.OBJECT_NAME) LIKE LOWER('%{1}%') or LOWER(dmd.sequence_name) LIKE LOWER('%{1}%') ) "
-JOB_DONE_GROUPBY = " GROUP BY dld.end_time , dmd.sequence_name , dlb.OBJECT_NAME ,dmd.TEMPLATE_NAME "
+JOB_DONE_WHERE = " AND LOWER({0}) LIKE LOWER('%{1}%') "
+JOB_DONE_GROUPBY = " GROUP BY dld.end_time , {} "
 JOB_DONE_PHRASE = 'job done'
 
 
@@ -103,8 +103,9 @@ def jobdone_intent_handler(intent_request, session_attributes):
 
     query_string = select_clause + where_clause + JOB_DONE_GROUPBY
 
-    response = helpers.execute_athena_query(query_string)
 
+    """
+    response = helpers.execute_athena_query(query_string)
     result = response['ResultSet']['Rows'][1]['Data'][0]
     if result:
         count = result['VarCharValue']
@@ -115,10 +116,10 @@ def jobdone_intent_handler(intent_request, session_attributes):
             response_string = 'Yes, there were {} {}'.format(count, JOB_DONE_PHRASE)
 
     logger.debug('<<BIBot>> "Count value is: %s' % count)
-
     """
+    
     response_string = query_string
-    """
+
 
     # add the English versions of the WHERE clauses
     for dimension in bibot.DIMENSIONS:

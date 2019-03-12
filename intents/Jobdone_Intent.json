@@ -19,7 +19,7 @@
         "sampleUtterances": [
           "Is {template_name} jobs completed on {job_date}",
 					"Is {template_name} jobs has been completed {job_date}",
-					"Was {template_name} jobs ran on {job_date}"
+					"Was {sequence_name} jobs ran on {job_date}"
           ],
     "slots": [
 			{
@@ -40,6 +40,24 @@
 					"sampleUtterances": [],
 					"description": "template_name"
 			},
+				{
+						"slotType": "sequence_name",
+						"name": "sequence_name",
+						"slotConstraint": "Optional",
+						"valueElicitationPrompt": {
+								"maxAttempts": 2,
+								"messages": [
+										{
+												"content": "The name of sequence/Object",
+												"contentType": "PlainText"
+										}
+								]
+						},
+						"priority": 1,
+						"slotTypeVersion": "$LATEST",
+						"sampleUtterances": [],
+						"description": "sequence_name"
+				},
         {
             "slotType": "AMAZON.DATE",
             "name": "job_date",
