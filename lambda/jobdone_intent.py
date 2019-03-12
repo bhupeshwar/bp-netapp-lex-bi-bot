@@ -88,7 +88,7 @@ def jobdone_intent_handler(intent_request, session_attributes):
     helpers.remember_slot_values(slot_values, session_attributes)
 
     # build and execute query
-    select_clause = JOB_DONE_SELECT.format(bibot.DIMENSIONS.get(dimension).get('column')
+
     where_clause = JOB_DONE_JOIN
     for dimension in bibot.DIMENSIONS:
         slot_key = bibot.DIMENSIONS.get(dimension).get('slot')
@@ -100,8 +100,10 @@ def jobdone_intent_handler(intent_request, session_attributes):
             if slot_key != 'job_date':
                 value = userexits.pre_process_query_value(slot_key, slot_values[slot_key])
                 where_clause += JOB_DONE_WHERE.format(bibot.DIMENSIONS.get(dimension).get('column'), value)
+                select_clause = JOB_DONE_SELECT.format(bibot.DIMENSIONS.get(dimension).get('column'))
+                groupby_clause = JOB_DONE_GROUPBY.format(bibot.DIMENSIONS.get(dimension).get('column'))
 
-    query_string = select_clause + where_clause + JOB_DONE_GROUPBY.format(bibot.DIMENSIONS.get(dimension).get('column')
+    query_string = select_clause + where_clause + groupby_clause
 
 
     """
