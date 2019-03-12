@@ -1,25 +1,11 @@
 {
         "name": "clone_name",
-        "description": "Names of clone_name in job_details database",
+        "description": "Names of Clone in job_details database",
         "valueSelectionStrategy": "TOP_RESOLUTION",
         "enumerationValues": [
-          {   "synonyms": [
-                "US Post Revenue",
-                "US-Post Revenue",
-                "US Post Revenue Load",
-                "US-Post Revenue Load",
-                "Post US"
-            ], "value": "US Post Revenue Load" },
-            {  "synonyms": [
-                "US Revenue",
-                "Revenue"
-            ], "value": "US Revenue" },
-          {  "synonyms": [
-                "EMEA"
-            ], "value": "EMEA" },
-          {  "synonyms": [
-                "BOOKING",
-                "US BBSBR"
-            ], "value": "BBSBR" }
-	       ]
+          { "value": "EMEA Clone" },
+          { "value": "BBSBR Clone" },
+          { "value": "REVENUE Clone" },
+          { "value": "POST-US Clone" }
+	 ]
 }
