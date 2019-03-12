@@ -28,7 +28,7 @@
                 "maxAttempts": 2,
                 "messages": [
                     {
-                        "content": "The type of event",
+                        "content": "The The name of dl",
                         "contentType": "PlainText"
                     }
                 ]

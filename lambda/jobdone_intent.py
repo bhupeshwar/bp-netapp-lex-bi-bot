@@ -102,7 +102,7 @@ def jobdone_intent_handler(intent_request, session_attributes):
                 where_clause += JOB_DONE_WHERE.format(bibot.DIMENSIONS.get(dimension).get('column'), value)
 
     query_string = select_clause + where_clause + JOB_DONE_GROUPBY
-
+    """
     response = helpers.execute_athena_query(query_string)
 
     result = response['ResultSet']['Rows'][1]['Data'][0]
@@ -118,7 +118,7 @@ def jobdone_intent_handler(intent_request, session_attributes):
 
     """
     response_string = query_string
-    """
+
     # add the English versions of the WHERE clauses
     for dimension in bibot.DIMENSIONS:
         slot_key = bibot.DIMENSIONS[dimension].get('slot')

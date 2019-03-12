@@ -30,7 +30,7 @@
 							"maxAttempts": 2,
 							"messages": [
 									{
-											"content": "The type of event",
+											"content": "The name of templates",
 											"contentType": "PlainText"
 									}
 							]
