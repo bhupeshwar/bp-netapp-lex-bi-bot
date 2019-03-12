@@ -27,7 +27,7 @@ import bibot_userexits as userexits
 #
 # parameters for Refresh intent
 #
-REFRESH_QUERY = 'SELECT DISTINCT SEQUENCE_NAME from ba_dashboard_master_details ORDER BY SEQUENCE_NAME'
+REFRESH_QUERY = 'SELECT DISTINCT sequence_name from ba_dashboard_master_details ORDER BY sequence_name'
 REFRESH_SLOT = 'sequence_name'
 REFRESH_INTENT = 'Jobdone_Intent'
 REFRESH_BOT = 'BIBotNetApp'
@@ -126,5 +126,5 @@ def refresh_intent_handler(intent_request, session_attributes):
 
     logger.debug('<<BIBot>> Lex put bot = ' + pprint.pformat(response, indent=4))
 
-    response_string = "I've refreshed the template name dimension from the database.  Please rebuild me."
+    response_string = "I've refreshed the sequence name dimension from the database.  Please rebuild me."
     return helpers.close(session_attributes, 'Fulfilled', {'contentType': 'PlainText','content': response_string})
