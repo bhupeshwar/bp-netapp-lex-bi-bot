@@ -33,7 +33,7 @@ SLOT_CONFIG = {
 DIMENSIONS = {
     'dl_name':     {'slot': 'dl_name',  'column': 'dl.dl_name',  'singular': 'dl_name'},
     'dl_date':     {'slot': 'dl_date', 'column': 'dl.end_date',       'singular': 'dl_date'},
-    'sequence_name':     {'slot': 'sequence_name', 'column': 'dlb.sequence_name',       'singular': 'sequence_name'},
+    'sequence_name':     {'slot': 'sequence_name', 'column': 'dmd.sequence_name',       'singular': 'sequence_name'},
     'job_date':     {'slot': 'job_date', 'column': 'dld.end_time',       'singular': 'job_date'},
     'clone_name':     {'slot': 'clone_name', 'column': 'dld.template_id',       'singular': 'clone_name'},
     'template_name':     {'slot': 'template_name',  'column': 'dmd.template_name',  'singular': 'template_name'}
