@@ -1,6 +1,6 @@
 {
         "name": "template_name",
-        "description": "Names of template_name in job_details database",
+        "description": "Names of template/job name in job_details database",
         "valueSelectionStrategy": "TOP_RESOLUTION",
         "enumerationValues": [
           {   "synonyms": [
