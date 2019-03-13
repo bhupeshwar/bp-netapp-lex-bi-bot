@@ -127,7 +127,7 @@ def clone_intent_handler(intent_request, session_attributes):
         if count == '0':
             response_string = 'There were no {}'.format(CLONE_JOB_DONE_PHRASE)
         else:
-            response_string = '{} {}'.format(count, CLONE_JOB_DONE_PHRASE)
+            response_string = '{} PST/PDT {}'.format(count, CLONE_JOB_DONE_PHRASE)
 
     logger.debug('<<BIBot>> "Count value is: %s' % count)
 
