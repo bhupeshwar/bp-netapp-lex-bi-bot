@@ -110,9 +110,9 @@ def jobdone_intent_handler(intent_request, session_attributes):
     response = helpers.execute_athena_query(query_string)
     result = response['ResultSet']['Rows'][1]['Data'][0]
     if result:
-        count = result['VarCharValue']
+        count = result['VarCharValue'].strip()
         # build response string
-        if count == 0:
+        if count.strip() == '0':
             response_string = 'There were no {}'.format(JOB_DONE_PHRASE)
         else:
             response_string = 'Yes, there were {} {}'.format(count, JOB_DONE_PHRASE)
